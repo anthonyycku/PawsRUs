@@ -1,0 +1,14 @@
+<a href="/fruits" class="brand-logo left">Fruits</a>
+<ul class="right">
+  <li><a href="/fruits/new">Create a new Fruit</a></li>
+  <% if (currentUser) { %>
+  <li>Welcome <%=currentUser.username %></li>
+  <form action="/sessions?_method=DELETE" method="POST">
+    <input type="submit" value="Log out" class="btn-small red">
+  </form>
+  <% } else { %>
+
+  <li><a href="/users/new">Sign Up</a> </li>
+  <li><a href="/sessions/new">Log In</a> </li>
+  <% } %>
+</ul>

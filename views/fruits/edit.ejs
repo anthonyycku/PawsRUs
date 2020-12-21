@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <%- include ('../partials/head.ejs') %>
+  </head>
+  <body>
+    <nav>
+      <%- include ('../partials/nav.ejs') %>
+    </nav>
+    <div class="container">
+      <h1>Fruits New Page</h1>
+      <form action="/fruits/<%=fruit.id%>?_method=PUT" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" name="name" value="<%=fruit.name%>" />
+        <label for="color">Color:</label>
+        <input type="text" name="color" value="<%=fruit.color%>" />
+        <br/>
+        <div>
+          <label for="readyToEat">
+            <input
+              type="checkbox"
+              id="readyToEat"
+              name="readyToEat"
+              <% if(fruit.readyToEat === true){ %>
+                checked
+              <% } %>
+            />
+            <span>Is Ready to Eat</span>
+          </label>
+        </div>
+        <br>
+        <input type="submit" value="Submit">
+      <form>
+      <button type="button" name="button">
+        <a href="/fruits">Back</a>
+      </button>
+    </div>
+  </body>
+</html>
