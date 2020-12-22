@@ -4,7 +4,7 @@ const sessions = express.Router();
 const User = require("../models/users.js");
 
 
-
+// Login page
 sessions.get("/new", (req, res) => {
     res.render("sessions/new.ejs", {
         currentUser: req.session.currentUser
@@ -12,7 +12,6 @@ sessions.get("/new", (req, res) => {
 })
 
 sessions.post("/", (req, res) => {
-
     User.findOne({ username: req.body.username }, (err, foundUser) => {
         if (err) {
             console.log(err);

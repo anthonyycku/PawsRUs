@@ -43,17 +43,17 @@ db.on('error', err => console.log(err.message + ' is mongod not running?'))
 db.on('disconnected', () => console.log('mongo disconnected'))
 
 // Controllers
-const fruitsController = require('./controllers/fruits_controller.js')
+const mainController = require('./controllers/main_controller.js')
 const userController = require("./controllers/users_controller.js");
 const sessionsController = require("./controllers/sessions_controller.js")
-app.use('/fruits', fruitsController)
+app.use('/main', mainController)
 app.use("/users", userController);
 app.use("/sessions", sessionsController);
 
 
 // Routes
 app.get('/', (req, res) => {
-    res.redirect('/fruits')
+    res.redirect('/main')
 })
 
 // Listener

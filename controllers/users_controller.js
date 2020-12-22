@@ -3,8 +3,8 @@ const express = require('express');
 const users = express.Router();
 const User = require("../models/users.js");
 
+//New sign up page
 users.get("/new", (req, res) => {
-    console.log(req.session.currentUser);
     res.render("users/new.ejs", {
         currentUser: req.session.currentUser
     });
