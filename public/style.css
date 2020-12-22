@@ -1,0 +1,15 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+
+#container {
+    width: 95%;
+    border: 5px gold solid;
+}
+
+#navigation {
+    display: flex;
+    border: 5px black solid;
+    justify-content: space-between;
+}

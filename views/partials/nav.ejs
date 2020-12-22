@@ -1,12 +1,31 @@
-<ul class="right">
-  <% if (currentUser) { %>
-  <li>Welcome <%=currentUser.username %></li>
-  <form action="/sessions?_method=DELETE" method="POST">
-    <input type="submit" value="Log out" class="btn-small red">
-  </form>
-  <% } else { %>
+<nav id="navigation" class="navbar">
 
-  <li><a href="/users/new">Sign Up</a> </li>
-  <li><a href="/sessions/new">Log In</a> </li>
-  <% } %>
-</ul>
+  <div>
+    <a id="brand" class="navbar-brand" href="/"><i class="fas fa-paw">pawsЯus</i></a>
+  </div>
+
+  <div>
+    <!-- LOGGED IN -->
+    <% if (currentUser) { %>
+    <li class="nav-item dropdown" style="list-style-type: none;">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        <%=currentUser.username%>
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <form action="/sessions?_method=DELETE" method="POST">
+          <!-- <input type="submit" value="Log out"> -->
+          <button class="dropdown-item">Log out</button>
+        </form>
+      </ul>
+    </li>
+
+
+    <!-- LOGGED OUT -->
+    <% } else { %>
+
+    <a class="btn btn-outline-success" href="/users/new">Sign Up</a>
+    <a class="btn btn-outline-primary" href="/sessions/new">Log In</a>
+    <% } %>
+  </div>
+</nav>

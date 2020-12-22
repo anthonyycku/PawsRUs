@@ -1,7 +1,10 @@
 const mongoose = require('mongoose')
 
 const petSchema = new mongoose.Schema({
-    name: String
+    name: {
+        type: String,
+        required: true
+    }
 })
 
 const Pet = mongoose.model('pawsrus', petSchema)
