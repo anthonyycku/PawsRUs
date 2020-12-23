@@ -1,10 +1,10 @@
-<nav id="navigation" class="navbar">
+<nav id="navigation" class="navbar rounded">
 
-  <div>
-    <a id="brand" class="navbar-brand" href="/"><i class="fas fa-paw">pawsЯus</i></a>
+  <div id="containerNav">
+    <a id="brand" class="navbar-brand" href="/"><i class="fas fa-paw"> pawsЯus</i></a>
   </div>
 
-  <div>
+  <div id="containerNav">
     <!-- LOGGED IN -->
     <% if (currentUser) { %>
     <li class="nav-item dropdown" style="list-style-type: none;">
@@ -24,8 +24,8 @@
     <!-- LOGGED OUT -->
     <% } else { %>
 
-    <a class="btn btn-outline-success" href="/users/new">Sign Up</a>
-    <a class="btn btn-outline-primary" href="/sessions/new">Log In</a>
+    <a class="btn btn-outline-success" href="/users/new">Sign Up <i class="fas fa-user-plus"></i></a>
+    <a class="btn btn-outline-primary" href="/sessions/new">Log In <i class="fas fa-sign-in-alt"></i></a>
     <% } %>
   </div>
 </nav>

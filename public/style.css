@@ -5,11 +5,18 @@ body {
 
 #container {
     width: 95%;
-    border: 5px gold solid;
 }
 
 #navigation {
     display: flex;
-    border: 5px black solid;
+    border: 3px blue solid;
     justify-content: space-between;
+}
+
+#containerNav {
+    margin: 0 10px 0 10px;
+}
+
+#firstRow {
+    border: 5px blue solid;
 }

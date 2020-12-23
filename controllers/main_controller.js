@@ -5,9 +5,7 @@ const router = express.Router()
 //AUTHENTICATE
 const isAuthenticated = (req, res, next) => {
     if (req.session.currentUser) {
-
         return next();
-
     } else {
         res.redirect("/sessions/new");
     }
@@ -90,4 +88,4 @@ router.put("/setup/nuke", isAuthenticated, (req, res) => {
     })
 })
 
-module.exports = router
+module.exports = router;
