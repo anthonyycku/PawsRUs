@@ -1,24 +1,24 @@
 <nav id="navigation" class="navbar rounded">
-
-  <div id="containerNav">
-    <a id="brand" class="navbar-brand" href="/"><i class="fas fa-paw"> pawsЯus</i></a>
+  <!-- Brand Icon -->
+  <div id="containerNav" class="containerBrand">
+    <a id="brand" class="navbar-brand" href="/"><i class="fas fa-paw"> PawsЯus</i></a>
   </div>
 
   <div id="containerNav">
     <!-- LOGGED IN -->
     <% if (currentUser) { %>
-    <li class="nav-item dropdown" style="list-style-type: none;">
-      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
+    <div class="btn-group" role="">
+      <button id="btnGroupDrop1" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown"
         aria-expanded="false">
-        <%=currentUser.username%>
-      </a>
-      <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <i class="fas fa-user-circle"></i> <%=currentUser.username%>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
         <form action="/sessions?_method=DELETE" method="POST">
-          <!-- <input type="submit" value="Log out"> -->
-          <button class="dropdown-item">Log out</button>
+          <button class="dropdown-item">Log out <i class="fas fa-sign-out"></i></button>
         </form>
       </ul>
-    </li>
+    </div>
+
 
 
     <!-- LOGGED OUT -->

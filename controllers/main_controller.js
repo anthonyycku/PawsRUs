@@ -10,6 +10,7 @@ const isAuthenticated = (req, res, next) => {
         res.redirect("/sessions/new");
     }
 };
+
 //////////////////////////////////
 //             ROUTES           //
 //////////////////////////////////
@@ -23,6 +24,7 @@ router.get('/', (req, res) => {
         })
     })
 })
+
 
 // NEW
 router.get('/new', (req, res) => {
