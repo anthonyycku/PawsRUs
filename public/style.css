@@ -15,8 +15,10 @@ body {
     height: auto;
     border-bottom: #003664 10px solid;
     margin-bottom: 5px;
-    background-color: #cdc2c0;
-    box-shadow: 0 4px 9px 0 rgba(151, 151, 151, 0.51);
+}
+
+.col-md-8 h5 {
+    color: rgb(216, 50, 0);
 }
 
 .containerBrand a {
@@ -28,7 +30,16 @@ body {
     margin: 0 10px 0 10px;
 }
 
+#headerBar {
+    background-color: #fff;
+    /* box-shadow: 5px 0 9px 0 rgba(151, 151, 151, 0.51); */
+}
+
 #firstContainer {
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     box-shadow: 0 4px 9px 0 rgba(151, 151, 151, 0.51)
+}
+
+.card {
+    box-shadow: 0 4px 9px 0 rgba(151, 151, 151, 0.51);
 }

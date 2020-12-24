@@ -8,16 +8,23 @@
 <body>
   <div id="container">
     <%- include ('../partials/nav.ejs') %>
-    <div id="firstContainer" class="container-fluid border" style="max-width: 1100px;">
+
+    <!-- header bar -->
+    <div class="container-fluid" style="max-width: 1100px;">
       <div class="row">
-        Hello
+        <div id="headerBar" class="col-md-6" style="height: 80px;">
+          <h1 style="font-size: 4em; text-align: center; color:#003664">Adopt</h1>
+        </div>
       </div>
+    </div>
+    <div id="firstContainer" class="container-fluid" style="max-width: 1100px;">
+
       <!-- Row -->
       <div class="row" style="display: flex; justify-content: center;">
-        <div class="col-sm-8">
+        <div class="col-sm-11" style="display: flex; flex-wrap: wrap;">
           <%for (let i = 0; i < data.length; i++) { %>
           <!-- Card -->
-          <div class="card mb-4 border-info" style="max-width: 340px;">
+          <div class="card mb-4" style="width: 210px; margin: 10px 15px 10px 15px; ">
             <div class="row">
               <div class="col-md-4">
                 <img src="..." alt="Image">
