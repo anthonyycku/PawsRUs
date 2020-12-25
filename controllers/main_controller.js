@@ -16,13 +16,28 @@ const isAuthenticated = (req, res, next) => {
 //////////////////////////////////
 
 // INDEX
-router.get('/', (req, res) => {
-    Paws.find({}, (error, allPets) => {
-        res.render('main/index.ejs', {
-            data: allPets,
-            currentUser: req.session.currentUser
-        })
+router.get('/:page', (req, res) => {
+
+    const perPage = 4;
+    const page = req.params.page || 1;
+    let numberOfProfiles = 0;
+
+    Paws.find({}, (err, data) => {
+        numberOfProfiles = data.length;
     })
+
+    Paws.find({}, (err, found) => {
+            res.render('main/index.ejs', {
+                data: found,
+                currentUser: req.session.currentUser,
+                currentPage: page,
+                pages: Math.ceil(numberOfProfiles / perPage),
+                results: numberOfProfiles
+            })
+        })
+        .skip((perPage * page) - (perPage))
+        .limit(perPage);
+
 })
 
 

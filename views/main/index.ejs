@@ -17,32 +17,58 @@
         </div>
       </div>
     </div>
+    <!-- Main content -->
     <div id="firstContainer" class="container-fluid" style="max-width: 1100px;">
 
       <!-- Row -->
       <div class="row" style="display: flex; justify-content: center;">
+        <!-- Article -->
         <div class="col-sm-11" style="display: flex; flex-wrap: wrap;">
-          <%for (let i = 0; i < data.length; i++) { %>
+          <%for (let pet of data) { %>
           <!-- Card -->
-          <div class="card mb-4" style="width: 210px; margin: 10px 15px 10px 15px; ">
-            <div class="row">
-              <div class="col-md-4">
-                <img src="..." alt="Image">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title"><%=data[i].name%></h5>
-                  <p class="card-text"> Age: <%=data[i].age %></p>
-                  <p class="card-text">Breed: <%=data[i].breed%></p>
-                </div>
-              </div>
+          <div class="card" style="width: 220px; margin: 10px;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title"><%=pet.name%></h5>
+              <p class="card-text">Age: <%=pet.age%></p>
+              <p class="card-text">Breed: <%=pet.breed%></p>
+              <a href="#" class="">More info...</a>
             </div>
           </div>
           <!-- End of card -->
           <% } %>
         </div>
+        <!--End of article-->
+      </div> <!-- End of Row-->
+      <!-- PAGINATION -->
+      <div class="row" style="display: flex; justify-content: center;">
+        <div id="pagination" class="col-sm-11" style="display: flex; justify-content: center;">
+          <% if (currentPage == 1 && pages > 1) { %>
+          <a href="/main/<%=parseInt(currentPage) + 1 %>">
+            Page <%= parseInt(currentPage) + 1%>
+            <i class="fal fa-arrow-circle-right"></i>
+          </a>
+
+          <% } else if (currentPage < pages) {%>
+          <a href="/main/<%=parseInt(currentPage) - 1%>">
+            Page <%=parseInt(currentPage) -1 %>
+            <i class="far fa-arrow-circle-left"></i>
+          </a>
+          <a href="/main/<%=parseInt(currentPage) + 1%>">
+            Page <%=parseInt(currentPage) + 1%>
+            <i class="fal fa-arrow-circle-right"></i>
+          </a>
+
+          <% } else if (currentPage == pages && pages > 1) {%>
+          <a href="/main/<%=parseInt(currentPage) - 1%>">
+            <i class="far fa-arrow-circle-left"></i>
+            Page <%=parseInt(currentPage) - 1 %>
+          </a>
+          <% } %>
+        </div>
       </div>
-    </div>
+      <!--End of PAGINATION-->
+    </div> <!-- End of Main content-->
 
   </div>
   </div>

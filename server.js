@@ -52,9 +52,10 @@ app.use("/users", userController);
 app.use("/sessions", sessionsController);
 
 
+
 // Routes
 app.get('/', (req, res) => {
-    res.redirect('/main')
+    res.redirect('/main/1')
 });
 
 // Listener

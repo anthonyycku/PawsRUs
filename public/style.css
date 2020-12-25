@@ -43,3 +43,7 @@ body {
 .card {
     box-shadow: 0 4px 9px 0 rgba(151, 151, 151, 0.51);
 }
+
+#pagination a {
+    text-decoration: none;
+}
