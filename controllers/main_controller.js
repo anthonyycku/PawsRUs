@@ -30,7 +30,7 @@ router.get('/:page', (req, res) => {
             res.render('main/index.ejs', {
                 data: found,
                 currentUser: req.session.currentUser,
-                currentPage: page,
+                currentPage: parseInt(page),
                 pages: Math.ceil(numberOfProfiles / perPage),
                 results: numberOfProfiles
             })
