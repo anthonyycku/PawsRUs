@@ -27,13 +27,15 @@ router.get('/:page', (req, res) => {
     })
 
     Paws.find({}, (err, found) => {
-            res.render('main/index.ejs', {
-                data: found,
-                currentUser: req.session.currentUser,
-                currentPage: parseInt(page),
-                pages: Math.ceil(numberOfProfiles / perPage),
-                results: numberOfProfiles
-            })
+            setTimeout((function() {
+                res.render('main/index.ejs', {
+                    data: found,
+                    currentUser: req.session.currentUser,
+                    currentPage: parseInt(page),
+                    pages: Math.ceil(numberOfProfiles / perPage),
+                    results: numberOfProfiles
+                })
+            }), 0);
         })
         .skip((perPage * page) - (perPage))
         .limit(perPage);

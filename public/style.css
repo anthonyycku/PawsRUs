@@ -37,7 +37,8 @@ body {
 
 #firstContainer {
     background-color: rgb(255, 255, 255);
-    box-shadow: 0 4px 9px 0 rgba(151, 151, 151, 0.51)
+    box-shadow: 0 4px 9px 0 rgba(151, 151, 151, 0.51);
+    min-height: 300px;
 }
 
 .card {
