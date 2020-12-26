@@ -12,12 +12,13 @@
     <div id="firstContainer" class="container-fluid" style="max-width: 600px; border-radius: 10px;">
       <div class="row" style="display: flex;">
         <!-- LEFT SIDE -->
-        <div class="col-sm-6" style=" max-width: 315px; background-color: rgb(0, 183, 255); border-radius: 10px;">
+        <div class="col-sm-6" style=" max-width: 315px; background-color: rgb(39, 45, 128); border-radius: 10px;">
           <img src="/images/signup.jpg" style="max-width: 290px;">
         </div>
 
         <!-- RIGHT SIDE -->
-        <div class="col-sm-6" style="">
+        <div class="col-sm-6">
+          </br>
           <h1>Registration</h1>
           <!-- FORM -->
           <form action="/users" method="POST">
@@ -26,7 +27,7 @@
             <div class="input-group flex-nowrap">
               <span class="input-group-text" id="addon-wrapping"><i class="fal fa-user"></i></span>
               <input name="username" type="text" class="form-control" placeholder="Username" aria-label="Username"
-                aria-describedby="addon-wrapping" autocomplete="off">
+                aria-describedby="addon-wrapping" autocomplete="off" <%if (user) { %> value="<%=user%>" <% } %>>
             </div>
             </br>
             <!-- Password -->
@@ -35,10 +36,21 @@
               <input name="password" type="password" class="form-control" placeholder="Password" aria-label="Password"
                 aria-describedby="addon-wrapping">
             </div>
-            </br>
+            <!-- Confirm Password -->
+            <div class="input-group flex-nowrap">
+              <span class="input-group-text" id="addon-wrapping"><i class="fal fa-key"></i></span>
+              <input name="confirmPassword" type="password" class="form-control" placeholder="Confirm Password"
+                aria-label="Password" aria-describedby="addon-wrapping">
+            </div>
+            <%if (userExists) { %>
+            <p style="color: orange;">Username already exists!</p>
+            <% } %>
+            <%if (!match) {%>
+            <p style="color: red; margin: 0;">Passwords do not match!</p>
+            <% }%>
             <!-- SUBMIT -->
-            <input type="submit" class="btn btn-outline-success" value="Sign Up" style="margin-bottom: 20px;">
-
+            <input type="submit" class="btn btn-success" value="Sign Up" style="margin-bottom: 20px; margin-top: 10px;">
+            <p>Already have an account? <a href="/sessions/new">Sign in.</a></p>
           </form>
         </div>
       </div>
