@@ -9,18 +9,42 @@
   <div id="container">
     <%- include ('../partials/nav.ejs') %>
 
-    <div class="container">
-      <h1>New User</h1>
-      <form action="/users" method="POST">
-        <label for="name">User Name:</label>
-        <input type="text" name="username" required />
-        <label for="color">Password:</label>
-        <input type="password" name="password" />
-        <br>
-        <input type="submit" value="Submit">
-        <form>
+    <div id="firstContainer" class="container-fluid" style="max-width: 600px; border-radius: 10px;">
+      <div class="row" style="display: flex;">
+        <!-- LEFT SIDE -->
+        <div class="col-sm-6" style=" max-width: 315px; background-color: rgb(0, 183, 255); border-radius: 10px;">
+          <img src="/images/signup.jpg" style="max-width: 290px;">
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="col-sm-6" style="">
+          <h1>Registration</h1>
+          <!-- FORM -->
+          <form action="/users" method="POST">
+            </br>
+            <!-- Username -->
+            <div class="input-group flex-nowrap">
+              <span class="input-group-text" id="addon-wrapping"><i class="fal fa-user"></i></span>
+              <input name="username" type="text" class="form-control" placeholder="Username" aria-label="Username"
+                aria-describedby="addon-wrapping" autocomplete="off">
+            </div>
+            </br>
+            <!-- Password -->
+            <div class="input-group flex-nowrap">
+              <span class="input-group-text" id="addon-wrapping"><i class="fal fa-key"></i></span>
+              <input name="password" type="password" class="form-control" placeholder="Password" aria-label="Password"
+                aria-describedby="addon-wrapping">
+            </div>
+            </br>
+            <!-- SUBMIT -->
+            <input type="submit" class="btn btn-outline-success" value="Sign Up" style="margin-bottom: 20px;">
+
+          </form>
+        </div>
+      </div>
     </div>
   </div>
+
 </body>
 
 </html>

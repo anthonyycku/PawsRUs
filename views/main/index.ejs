@@ -24,16 +24,16 @@
         <div class="col-sm-2" style="display: flex;">
           <form action="/main/setup/seed" style="margin-right: 20px;">
             <% if (currentUser) { %>
-            <input type="submit" class="btn btn-success" value="Seed!">
+            <input type="submit" class="btn btn-success" value="Seed sample data">
             <% } else { %>
-            <input type="submit" class="btn btn-success disabled" value="Seed!">
+            <input type="submit" class="btn btn-success disabled" value="Seed sample data">
             <% } %>
           </form>
           <form action="/main/setup/nuke?_method=DELETE" method="POST">
             <% if (currentUser) { %>
-            <input type="submit" class="btn btn-danger" value="Nuke!">
+            <input type="submit" class="btn btn-danger" value="Clear all data">
             <% } else { %>
-            <input type="submit" class="btn btn-danger disabled" value="Nuke!">
+            <input type="submit" class="btn btn-danger disabled" value="Clear all data">
             <% } %>
           </form>
         </div>

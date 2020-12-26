@@ -93,33 +93,41 @@ router.get('/:id', (req, res) => {
 
 // SEED ROUTE
 router.get('/setup/seed', isAuthenticated, (req, res) => {
-    Paws.insertMany([{
-        name: "1",
-        age: "1yr 2mo",
-        breed: "golden retriever"
-    }, {
-        name: "2",
-        age: "1yr 5mo",
-        breed: "golden reliever"
-    }, {
-        name: "3",
-        age: "6yr",
-        breed: "Dachsund"
-    }, {
-        name: "4",
-        age: "not born",
-        breed: "frog"
-    }, {
-        name: "5",
-        age: "13yr",
-        breed: "gangster"
-    }, {
-        name: "6",
-        age: "2mo",
-        breed: "big dude"
-    }], (error, data) => {
-        res.redirect('/')
+
+    Paws.count({}, (err, count) => {
+
+        if (count < 36) {
+            Paws.insertMany([{
+                name: "1",
+                age: "1yr 2mo",
+                breed: "golden retriever"
+            }, {
+                name: "2",
+                age: "1yr 5mo",
+                breed: "golden reliever"
+            }, {
+                name: "3",
+                age: "6yr",
+                breed: "Dachsund"
+            }, {
+                name: "4",
+                age: "not born",
+                breed: "frog"
+            }, {
+                name: "5",
+                age: "13yr",
+                breed: "gangster"
+            }, {
+                name: "6",
+                age: "2mo",
+                breed: "big dude"
+            }], (error, data) => {
+
+            })
+        }
+        res.redirect("/");
     })
+
 })
 
 // NUKE ROUTE
