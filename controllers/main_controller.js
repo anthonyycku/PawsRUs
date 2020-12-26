@@ -17,7 +17,6 @@ const isAuthenticated = (req, res, next) => {
 
 // INDEX
 router.get('/:page', (req, res) => {
-
     const perPage = 4;
     const page = req.params.page || 1;
     let numberOfProfiles = 0;
@@ -27,19 +26,22 @@ router.get('/:page', (req, res) => {
     })
 
     Paws.find({}, (err, found) => {
+            setTimeout(function() {
+                userCreated = false;
+            }, 150);
             setTimeout((function() {
                 res.render('main/index.ejs', {
                     data: found,
                     currentUser: req.session.currentUser,
                     currentPage: parseInt(page),
                     pages: Math.ceil(numberOfProfiles / perPage),
-                    results: numberOfProfiles
+                    results: numberOfProfiles,
+                    userCreated: userCreated
                 })
             }), 100);
         })
         .skip((perPage * page) - (perPage))
         .limit(perPage);
-
 })
 
 
@@ -94,7 +96,7 @@ router.get('/:id', (req, res) => {
 // SEED ROUTE
 router.get('/setup/seed', isAuthenticated, (req, res) => {
 
-    Paws.count({}, (err, count) => {
+    Paws.countDocuments({}, (err, count) => {
 
         if (count < 36) {
             Paws.insertMany([{

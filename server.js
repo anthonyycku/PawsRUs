@@ -50,6 +50,7 @@ const sessionsController = require("./controllers/sessions_controller.js");
 app.use('/main', mainController);
 app.use("/users", userController);
 app.use("/sessions", sessionsController);
+global.userCreated = false;
 
 
 

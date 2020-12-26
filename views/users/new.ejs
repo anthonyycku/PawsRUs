@@ -42,6 +42,9 @@
               <input name="confirmPassword" type="password" class="form-control" placeholder="Confirm Password"
                 aria-label="Password" aria-describedby="addon-wrapping">
             </div>
+            <%if (tooShort) { %>
+            <p style="color:crimson">Password must have at least 4 characters!</p>
+            <% } %>
             <%if (userExists) { %>
             <p style="color: orange;">Username already exists!</p>
             <% } %>
