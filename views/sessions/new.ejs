@@ -30,6 +30,12 @@
             <input name="password" type="password" class="form-control" placeholder="Password" aria-label="Password"
               aria-describedby="addon-wrapping">
           </div>
+          <%if (!usernameExists) { %>
+          <p style="color:crimson">Username does not exist!</p>
+          <% } %>
+          <%if (!passwordMatch) { %>
+          <p style="color:crimson">Incorrect password. Try again.</p>
+          <% } %>
           </br>
           <input type="submit" class="btn btn-primary" value="Login">
         </form>

@@ -5,9 +5,16 @@ const User = require("../models/users.js");
 
 
 // Login page
+let usernameExists;
+let passwordMatch;
+
 sessions.get("/new", (req, res) => {
+    usernameExists = true;
+    passwordMatch = true;
     res.render("sessions/new.ejs", {
-        currentUser: req.session.currentUser
+        currentUser: req.session.currentUser,
+        usernameExists: usernameExists,
+        passwordMatch: passwordMatch
     })
 })
 
@@ -16,14 +23,29 @@ sessions.post("/", (req, res) => {
         if (err) {
             console.log(err);
             res.send("Oops DB has a problem");
+            // Username does not exist
         } else if (!foundUser) {
-            res.send("<a href='/'> Username does not exist </a>");
+            usernameExists = false;
+            passwordMatch = true;
+            res.render("sessions/new.ejs", {
+                currentUser: req.session.currentUser,
+                usernameExists: usernameExists,
+                passwordMatch: passwordMatch
+
+            })
         } else {
             if (bcrypt.compareSync(req.body.password, foundUser.password)) {
                 req.session.currentUser = foundUser;
                 res.redirect("/");
-            } else {
-                res.send("<a href='/'> Password does not match </a>");
+
+            } else { // Password does not match
+                passwordMatch = false;
+                usernameExists = true;
+                res.render("sessions/new.ejs", {
+                    currentUser: req.session.currentUser,
+                    usernameExists: usernameExists,
+                    passwordMatch: passwordMatch
+                })
             }
         }
     })
