@@ -9,8 +9,10 @@ const petSchema = new mongoose.Schema({
     breed: String,
     description: String,
     likes: [String],
-    dislikes: [String],
-    image: String
+    image: String,
+    goodWithKids: Boolean,
+    goodWithDogs: Boolean,
+    goodWithCats: Boolean
 })
 
 const Pet = mongoose.model('pawsrus', petSchema)

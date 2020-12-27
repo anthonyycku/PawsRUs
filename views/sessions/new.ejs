@@ -9,18 +9,35 @@
   <div id="container">
     <%- include ('../partials/nav.ejs') %>
 
-    <div class="container">
-      <h1>Log In</h1>
-      <form action="/sessions" method="POST">
-        <label for="name">User Name:</label>
-        <input type="text" name="username" required />
-        <label for="color">Password:</label>
-        <input type="password" name="password" />
-        <br>
-        <input type="submit" value="Submit">
-        <form>
+    <div id="firstContainer" class="container-fluid"
+      style="max-width: 400px; border-radius: 10px; display: flex;flex-direction: column; align-items: center;">
+      <div class="col-sm-10" style="padding: 10px; text-align: center;">
+        <i style="font-size: 3em; color: rgb(39, 45, 128);" class="far fa-bone"></i>
+        <h1>Login</h1>
+        <!-- FORM -->
+        <form action="/sessions/" method="POST">
+          </br>
+          <!-- Username -->
+          <div class="input-group flex-nowrap">
+            <span style="height: 38px;" class="input-group-text" id="addon-wrapping"><i class="fal fa-user"></i></span>
+            <input name="username" type="text" class="form-control" placeholder="Username" aria-label="Username"
+              aria-describedby="addon-wrapping" autocomplete="off" style="margin-bottom: 5px;">
+          </div>
+          <!-- Password -->
+          <div class="input-group flex-nowrap">
+            <span style="max-width: 40px;" class="input-group-text" id="addon-wrapping"><i
+                class="fal fa-key"></i></span>
+            <input name="password" type="password" class="form-control" placeholder="Password" aria-label="Password"
+              aria-describedby="addon-wrapping">
+          </div>
+          </br>
+          <input type="submit" class="btn btn-primary" value="Login">
+        </form>
+        <p>Don't have an account? <a href="/users/new">Sign Up.</a></p>
+      </div>
     </div>
   </div>
+
 
 
 </body>

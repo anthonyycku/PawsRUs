@@ -26,6 +26,7 @@ users.get("/new", (req, res) => {
 })
 
 users.post("/", (req, res) => {
+    // check password length
     if (req.body.password.length < 4) {
         passwordTooShort = true;
         userBefore = req.body.username;
@@ -37,6 +38,7 @@ users.post("/", (req, res) => {
             match: passwordMatch,
             tooShort: passwordTooShort
         });
+        //Check password match
     } else if (req.body.password === req.body.confirmPassword) {
 
         passwordMatch = true;
@@ -58,8 +60,9 @@ users.post("/", (req, res) => {
                 res.redirect("/");
             }
         })
-
+        // Passwords dont match
     } else {
+
         passwordTooShort = false;
         userBefore = req.body.username;
         passwordMatch = false;
