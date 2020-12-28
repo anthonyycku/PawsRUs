@@ -4,17 +4,35 @@
 <head>
   <%- include ('../partials/head.ejs') %>
 </head>
+<!-- Toast script -->
+<script>
+  $(document).ready(function () {
+    $(".toast").toast({
+      delay: 10000
+    });
+    $(".toast").toast("show");
+  })
+</script>
 
 <body>
+
+  <!-- Toast -->
+  <%if (userCreated) { %>
+  <div style="z-index: 1; position: absolute; top: 70px; right: 0;" class="toast" role="alert" aria-live="assertive"
+    aria-atomic="true">
+    <div class="toast-header" style="color: green;">
+      <i class="fas fa-check-circle">- </i>
+      <strong class="me-auto">Success!</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      User has been successfully created. Please login to access user panel.
+    </div>
+  </div>
+  <% } %>
+
   <div id="container">
     <%- include ('../partials/nav.ejs') %>
-
-    <!-- user success -->
-    <div class="container-fluid" style="display: flex; justify-content: center;">
-      <%if (userCreated) { %>
-      <%-include("../partials/toast.ejs")%>
-      <% } %>
-    </div>
 
     <!-- header bar -->
     <div class="container-fluid" style="max-width: 1100px;">

@@ -5,6 +5,13 @@
   <%- include ('../partials/head.ejs') %>
 </head>
 
+<script>
+  $(function () {
+    $('[data-bs-toggle="tooltip"]').tooltip()
+  })
+</script>
+
+
 <body>
 
   <div id="container">
@@ -12,6 +19,9 @@
 
 
     <div id="firstContainer" class="container-fluid" style="max-width: 600px; border-radius: 10px;">
+
+
+
 
       <div class="row" style="display: flex;">
         <!-- LEFT SIDE -->
@@ -31,14 +41,19 @@
             <div class="input-group flex-nowrap">
               <span class="input-group-text" id="addon-wrapping"><i class="fal fa-user"></i></span>
               <input name="username" type="text" class="form-control" placeholder="Username" aria-label="Username"
-                aria-describedby="addon-wrapping" autocomplete="off" <%if (user) { %> value="<%=user%>" <% } %>>
+                aria-describedby="addon-wrapping" autocomplete="off" <%if (user) { %> value="<%=user%>" <% } %>
+                data-bs-toggle="tooltip" data-bs-placement="right"
+                title="Usernames cannot contain symbols/capitalization">
+
             </div>
+
             </br>
             <!-- Password -->
             <div class="input-group flex-nowrap">
               <span class="input-group-text" id="addon-wrapping"><i class="fal fa-key"></i></span>
               <input name="password" type="password" class="form-control" placeholder="Password" aria-label="Password"
-                aria-describedby="addon-wrapping">
+                aria-describedby="addon-wrapping" data-bs-toggle="tooltip" data-bs-placement="right"
+                title="Passwords must be at least 4 characters long">
             </div>
             <!-- Confirm Password -->
             <div class="input-group flex-nowrap">
@@ -66,29 +81,10 @@
       </div>
     </div>
 
-    <!-- Rules -->
-    <div class="row" style="justify-content: center; display: flex; margin: 20px 0 10px 0;">
-      <div class="col-sm-5" style="max-width: 650px;">
-        <div class="accordion-item" style="background-color: white;">
-          <h2 class="accordion-header" id="headingOne"">
-            <button class=" accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-            aria-expanded="true" aria-controls="collapseOne">
-            <i class="far fa-info-circle"> Account Rules:</i>
-            </button>
-          </h2>
-          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-            data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <p><code>Usernames </code>cannot have symbols/capitalization</p>
-              <p><code>Passwords </code>must be at least 4 characters long</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--  -->
-
   </div>
+  <!-- Container end -->
+
+  <!-- Scripts -->
 
 
 
