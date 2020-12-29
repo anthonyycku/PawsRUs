@@ -25,6 +25,10 @@ router.get('/new', isAuthenticated, (req, res) => {
 
 router.post('/new', (req, res) => {
     let result = req.body;
+
+    if (result.image === "") {
+        result.image = "na.jpeg";
+    }
     if (result.goodWithKids === "on") {
         result.goodWithKids = true;
     } else {
@@ -94,29 +98,59 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
 
         if (count < (maxProfiles - 4)) {
             Paws.insertMany([{
-                name: "1",
+                name: "Al Gore",
                 age: "1yr 2mo",
-                breed: "golden retriever"
+                breed: "Something",
+                image: "sample1.jpg",
+                goodWithCats: true,
+                goodWithKids: true,
+                goodWithDogs: false,
+                description: "Great doggo from downtown"
             }, {
-                name: "2",
+                name: "handsomeboy",
                 age: "1yr 5mo",
-                breed: "golden reliever"
+                breed: "snowman",
+                image: "sample2.jpg",
+                goodWithCats: false,
+                goodWithKids: true,
+                goodWithDogs: false,
+                description: "Most handsome dog in chinatown"
             }, {
-                name: "3",
-                age: "6yr",
-                breed: "Dachsund"
-            }, {
-                name: "4",
-                age: "not born",
-                breed: "frog"
-            }, {
-                name: "5",
-                age: "13yr",
-                breed: "gangster"
-            }, {
-                name: "6",
+                name: "puppy",
                 age: "2mo",
-                breed: "big dude"
+                breed: "Mixed",
+                image: "sampl3.jpeg",
+                goodWithCats: false,
+                goodWithKids: true,
+                goodWithDogs: false,
+                description: "Cutest little puppers that's not a frog"
+            }, {
+                name: "Froggo",
+                age: "Unknown",
+                breed: "frogman",
+                image: "sample4.jpg",
+                goodWithCats: true,
+                goodWithKids: true,
+                goodWithDogs: true,
+                description: "Don't know if this guy is a frog or a cow"
+            }, {
+                name: "Slim Jim",
+                age: "13yr",
+                breed: "Longneckboy",
+                image: "sample5.jpg",
+                goodWithCats: false,
+                goodWithKids: false,
+                goodWithDogs: false,
+                description: "His tongue can whip you senseless"
+            }, {
+                name: "Tubs",
+                age: "3yr",
+                breed: "SleepyBoy",
+                image: "sample6.jpeg",
+                goodWithCats: true,
+                goodWithKids: true,
+                goodWithDogs: false,
+                description: "Sleeps all day and will eat your pasta"
             }], (error, data) => {
 
             })
