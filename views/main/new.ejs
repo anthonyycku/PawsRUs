@@ -17,14 +17,14 @@
           <div class="col-sm-6">
             <div class="input-group mb-3">
               <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
-              <input name="name" type="text" class="form-control" aria-label="Sizing example input"
+              <input autocomplete="off" name="name" type="text" class="form-control" aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-default">
             </div>
           </div>
           <div class="col-sm-3">
             <div class="input-group mb-3">
               <span class="input-group-text" id="inputGroup-sizing-default">Age</span>
-              <input name="age" type="text" class="form-control" aria-label="Sizing example input"
+              <input autocomplete="off" name="age" type="text" class="form-control" aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-default">
             </div>
           </div>
@@ -34,7 +34,7 @@
           <div class="col-sm-6">
             <div class="input-group mb-3">
               <span class="input-group-text" id="inputGroup-sizing-default">Breed</span>
-              <input name="breed" type="text" class="form-control" aria-label="Sizing example input"
+              <input autocomplete="off" name="breed" type="text" class="form-control" aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-default">
             </div>
           </div>
@@ -73,8 +73,10 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-sm-2">
-              <button class="btn btn-success">Create</button>
+            <div class="col-sm-12" style="display: flex; justify-content: space-between;">
+              <a class="btn btn-warning" href="/">Back</a>
+              <input type="submit" class="btn btn-success" value="Create">
+
             </div>
           </div>
       </form>
