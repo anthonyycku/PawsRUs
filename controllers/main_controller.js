@@ -40,9 +40,16 @@ router.post('/new', (req, res) => {
     } else {
         result.goodWithCats = false;
     }
-    Paws.create(req.body, (error, createdPet) => {
-        res.redirect('/')
+    Paws.countDocuments({}, (err, count) => {
+        if (count < maxProfiles) {
+            Paws.create(req.body, (error, createdPet) => {
+                res.redirect('/')
+            })
+        } else {
+            res.redirect("/");
+        }
     })
+
 })
 
 // EDIT
@@ -85,7 +92,7 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
 
     Paws.countDocuments({}, (err, count) => {
 
-        if (count < 36) {
+        if (count < (maxProfiles - 4)) {
             Paws.insertMany([{
                 name: "1",
                 age: "1yr 2mo",

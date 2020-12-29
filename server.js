@@ -51,6 +51,7 @@ app.use('/main', mainController);
 app.use("/users", userController);
 app.use("/sessions", sessionsController);
 global.userCreated = false;
+global.maxProfiles = 40;
 
 
 
