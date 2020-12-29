@@ -67,6 +67,13 @@
                   </p>
                   <% } %>
                   <div class="col-sm-2" style="display: flex;">
+                    <form action="/main/new" style="margin-right: 20px;">
+                      <% if (currentUser) { %>
+                      <input type="submit" class="btn btn-warning" value="Create new data">
+                      <% } else { %>
+                      <input type="submit" class="btn btn-warning disabled" value="Create new data">
+                      <% } %>
+                    </form>
                     <form action="/main/setup/seed" style="margin-right: 20px;">
                       <% if (currentUser) { %>
                       <input type="submit" class="btn btn-success" value="Seed sample data">

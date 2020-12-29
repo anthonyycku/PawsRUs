@@ -15,35 +15,6 @@ const isAuthenticated = (req, res, next) => {
 //             ROUTES           //
 //////////////////////////////////
 
-// INDEX
-router.get('/:page', (req, res) => {
-    const perPage = 4;
-    const page = req.params.page || 1;
-    let numberOfProfiles = 0;
-
-    Paws.find({}, (err, data) => {
-        numberOfProfiles = data.length;
-    })
-
-    Paws.find({}, (err, found) => {
-            setTimeout(function() {
-                userCreated = false;
-            }, 150);
-            setTimeout((function() {
-                res.render('main/index.ejs', {
-                    data: found,
-                    currentUser: req.session.currentUser,
-                    currentPage: parseInt(page),
-                    pages: Math.ceil(numberOfProfiles / perPage),
-                    results: numberOfProfiles,
-                    userCreated: userCreated
-                })
-            }), 100);
-        })
-        .skip((perPage * page) - (perPage))
-        .limit(perPage);
-})
-
 
 // NEW
 router.get('/new', isAuthenticated, (req, res) => {
@@ -52,14 +23,30 @@ router.get('/new', isAuthenticated, (req, res) => {
     })
 })
 
-router.post('/', (req, res) => {
+router.post('/new', (req, res) => {
+    let result = req.body;
+    if (result.goodWithKids === "on") {
+        result.goodWithKids = true;
+    } else {
+        result.goodWithKids = false;
+    }
+    if (result.goodWithDogs === "on") {
+        result.goodWithDogs = true;
+    } else {
+        result.goodWithDogs = false;
+    }
+    if (result.goodWithCats === "on") {
+        result.goodWithCats = true;
+    } else {
+        result.goodWithCats = false;
+    }
     Paws.create(req.body, (error, createdPet) => {
-        res.redirect('/main')
+        res.redirect('/')
     })
 })
 
 // EDIT
-router.get('/:id/edit', isAuthenticated, (req, res) => {
+router.get('/edit/:id', isAuthenticated, (req, res) => {
     Paws.findById(req.params.id, (error, foundPet) => {
         res.render('main/edit.ejs', {
             data: foundPet,
@@ -68,7 +55,7 @@ router.get('/:id/edit', isAuthenticated, (req, res) => {
     })
 })
 
-router.put('/:id', isAuthenticated, (req, res) => {
+router.put('/edit/:id', isAuthenticated, (req, res) => {
     Paws.findByIdAndUpdate(req.params.id, req.body, { new: true },
         (error, updatedModel) => {
             res.redirect('/main')
@@ -77,14 +64,14 @@ router.put('/:id', isAuthenticated, (req, res) => {
 })
 
 // DELETE
-router.delete('/:id', (req, res) => {
+router.delete('/show/:id', (req, res) => {
     Paws.findByIdAndRemove(req.params.id, (err, deletedPet) => {
         res.redirect('/main')
     })
 })
 
 // SHOW
-router.get('/:id', (req, res) => {
+router.get('/show/:id', (req, res) => {
     Paws.findById(req.params.id, (error, foundPet) => {
         res.render('main/show.ejs', {
             data: foundPet,
@@ -137,6 +124,35 @@ router.delete("/setup/nuke", isAuthenticated, (req, res) => {
     Paws.deleteMany({}, (err, deleted) => {
         res.redirect("/");
     })
+})
+
+// INDEX
+router.get('/:page', (req, res) => {
+    const perPage = 4;
+    const page = req.params.page || 1;
+    let numberOfProfiles = 0;
+
+    Paws.find({}, (err, data) => {
+        numberOfProfiles = data.length;
+    })
+
+    Paws.find({}, (err, found) => {
+            setTimeout(function() {
+                userCreated = false;
+            }, 150);
+            setTimeout((function() {
+                res.render('main/index.ejs', {
+                    data: found,
+                    currentUser: req.session.currentUser,
+                    currentPage: parseInt(page),
+                    pages: Math.ceil(numberOfProfiles / perPage),
+                    results: numberOfProfiles,
+                    userCreated: userCreated
+                })
+            }), 100);
+        })
+        .skip((perPage * page) - (perPage))
+        .limit(perPage);
 })
 
 module.exports = router;
