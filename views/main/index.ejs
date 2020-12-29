@@ -61,10 +61,10 @@
                 data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                   <% if (!currentUser) { %>
-                  <p style="color: rgb(235, 86, 0);"><i class="fal fa-exclamation-triangle"></i> Please create an
+                  <h4 style="color: rgb(235, 86, 0);"><i class="fal fa-exclamation-triangle"></i> Please create an
                     account and
                     sign in to use the panel
-                  </p>
+                  </h4>
                   <% } %>
 
                   <form action="/main/new" style="margin-right: 20px; display: inline-block;">
@@ -94,7 +94,7 @@
                     <div class="col-sm-12">
                       <p>Note: Maximum of 40 entries displayed. Newly created entries will not display when 40 entries
                         already exist.</p>
-                      <p>Use "Clear all data" to clear the entries.</p>
+                      <p>Use <code>[Clear all data]</code> to clear the entries.</p>
                     </div>
                   </div>
                 </div>
@@ -118,7 +118,7 @@
               <h5 class="card-title"><%=pet.name%></h5>
               <p class="card-text">Age: <%=pet.age%></p>
               <p class="card-text">Breed: <%=pet.breed%></p>
-              <a href="#" class="">More info...</a>
+              <a href="#" style="text-decoration: none;">More info...</a>
             </div>
           </div>
           <!-- End of card -->
