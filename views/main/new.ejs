@@ -13,19 +13,20 @@
       <div class="row">
         <img src="/images/create.jpg">
       </div>
-      <h2> </h2>
+      <h2>Add a new entry </h2>
       <br>
       <form action="/main/new" method="POST">
         <!-- NAME AND AGE -->
         <div class="row">
           <div class="col-sm-6">
             <div class="input-group mb-3">
-              <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
+              <span class="input-group-text" id="inputGroup-sizing-default">Name <span
+                  style="color:red;">*</span></span>
               <input autocomplete="off" name="name" type="text" class="form-control" aria-label="Sizing example input"
-                aria-describedby="inputGroup-sizing-default">
+                aria-describedby="inputGroup-sizing-default" placeholder="Required">
             </div>
           </div>
-          <div class="col-sm-3">
+          <div class="col-sm-4">
             <div class="input-group mb-3">
               <span class="input-group-text" id="inputGroup-sizing-default">Age</span>
               <input autocomplete="off" name="age" type="text" class="form-control" aria-label="Sizing example input"
