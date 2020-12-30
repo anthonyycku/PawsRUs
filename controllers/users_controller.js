@@ -32,16 +32,16 @@ users.get("/new", (req, res) => {
 })
 
 // Validation function
-function invalidName(str) {
-    let symbolTest = (/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/g.test(str));
-    let capsTest = (/[A-Z]/.test(str));
-    return symbolTest || capsTest;
+
+function validName(str) {
+    let validTest = (/^(?=.*[a-z])[a-z0-9]{4,12}$/.test(str));
+    return validTest;
 }
 
 users.post("/", (req, res) => {
 
     // Username validation
-    if (invalidName(req.body.username)) {
+    if (!validName(req.body.username)) {
         invalidUser = true;
         passwordTooShort = false;
         userBefore = "";

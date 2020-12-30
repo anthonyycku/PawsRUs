@@ -8,7 +8,62 @@
 <body>
   <div id="container">
     <%- include ('../partials/nav.ejs') %>
+    <br>
+    <div id="firstContainer" class="container-fluid" style="max-width: 700px; border-radius: 10px; padding: 10px;">
+      <div class="row">
+        <div class="col-sm-8">
+          <a href="/main/<%=userPage%>"><i style="font-size: 2em;color: rgb(189, 189, 0);"
+              class="fad fa-arrow-circle-left"></i></a>
+          <br>
+          <h2><%=pet.name%></h2>
+          <br>
+          <h5>Age: <%=pet.age%></h5>
+          <h5>Breed: <%=pet.breed%></h5>
+        </div>
+        <div class=" col-sm-4">
+          <img style="width: 200px; height: 200px; border-radius: 10px; border: 2px solid black;" src="<%=pet.image%>">
+        </div>
+      </div>
+      <div class="row" style="margin-left: 4px; margin-top: 10px;">
+        <div class="col-sm-11" style="border-bottom: 2px solid black;">
+        </div>
+      </div>
+      <div class="row" style="margin-top: 10px;">
+        <div class="col-sm-8">
+          <h5>Description</h5>
+          <%=pet.description%>
+        </div>
+      </div>
 
+      <div class="row" style="margin-left: 4px; margin-top: 10px;">
+        <div class="col-sm-11" style="border-bottom: 2px solid black;">
+        </div>
+      </div>
+      <div class="row" style="margin-top: 10px;">
+        <div class="col-sm-12">
+          Good with kids:
+          <%if (pet.goodWithKids === true) { %>
+          Yes
+          <% } else {%>
+          No
+          <% } %>
+          <br>
+          Good with other dogs:
+          <%if (pet.goodWithDogs === true) { %>
+          Yes
+          <% } else {%>
+          No
+          <% } %>
+          <br>
+          Good with cats:
+          <%if (pet.goodWithCats === true) { %>
+          Yes
+          <% } else {%>
+          No
+          <% } %>
+        </div>
+      </div>
+    </div>
   </div>
 </body>
 

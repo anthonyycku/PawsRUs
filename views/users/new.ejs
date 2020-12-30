@@ -42,8 +42,8 @@
               <span class="input-group-text" id="addon-wrapping"><i class="fal fa-user"></i></span>
               <input name="username" type="text" class="form-control" placeholder="Username" aria-label="Username"
                 aria-describedby="addon-wrapping" autocomplete="off" <%if (user) { %> value="<%=user%>" <% } %>
-                data-bs-toggle="tooltip" data-bs-placement="right"
-                title="Usernames cannot contain symbols/capitalization">
+                data-bs-toggle="tooltip" data-bs-placement="right" title="Usernames must be 4-12 chars long,
+                 no symbols or caps, and contain at least 1 letter">
 
             </div>
 
@@ -71,7 +71,7 @@
             <p style="color: red; margin: 0;">Passwords do not match!</p>
             <% }%>
             <% if (invalidUser) { %>
-            <p style="color: crimson">Username cannot contain symbols or caps.</p>
+            <p style="color: crimson">Invalid username.</p>
             <% } %>
             <!-- SUBMIT -->
             <input type="submit" class="btn btn-success" value="Sign Up" style="margin-bottom: 20px; margin-top: 10px;">

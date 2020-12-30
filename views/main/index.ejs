@@ -33,7 +33,7 @@
 
   <div id="container">
     <%- include ('../partials/nav.ejs') %>
-
+    <br>
     <!-- header bar -->
     <div class="container-fluid" style="max-width: 1100px;">
       <div class="row">
@@ -61,10 +61,10 @@
                 data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                   <% if (!currentUser) { %>
-                  <h4 style="color: rgb(235, 86, 0);"><i class="fal fa-exclamation-triangle"></i> Please create an
+                  <h5 style="color: rgb(235, 86, 0);"><i class="fal fa-exclamation-triangle"></i> Please create an
                     account and
                     sign in to use the panel
-                  </h4>
+                  </h5>
                   <% } %>
 
                   <form action="/main/new" style="margin-right: 20px; display: inline-block;">
@@ -113,7 +113,7 @@
           <%for (let pet of data) { %>
           <!-- Card -->
           <div class="card" style="width: 220px; margin: 20px 10px 0 10px;">
-            <img style="width: 220px; height: 200px;" src="<%=pet.image%>" class="card-img-top">
+            <img style="width: 217px; height: 200px;" src="<%=pet.image%>" class="card-img-top">
             <div class="card-body">
               <h5 class="card-title"><%=pet.name%></h5>
               <p class="card-text">Age: <%=pet.age%></p>

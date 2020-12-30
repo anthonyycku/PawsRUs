@@ -5,16 +5,15 @@ const cloudinary = require("cloudinary").v2;
 const multer = require("multer");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
-//
-
+//Cloud storage
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
         folder: 'paws'
     },
 });
-
 const parser = multer({ storage: storage });
+
 //AUTHENTICATE
 const isAuthenticated = (req, res, next) => {
     if (req.session.currentUser) {
@@ -39,10 +38,12 @@ router.get('/new', isAuthenticated, (req, res) => {
 router.post('/new', parser.single("image"), (req, res) => {
     let result = req.body;
 
-    cloudinary.uploader.upload(req.file.image,
-        function(error, result) { console.log(result, error) });
+    if (!req.file) {
+        result.image = "/images/sample/na.jpeg";
+    } else {
+        result.image = req.file.path;
+    }
 
-    result.image = req.file.path;
     if (result.goodWithKids === "on") {
         result.goodWithKids = true;
     } else {
@@ -99,7 +100,7 @@ router.delete('/show/:id', (req, res) => {
 router.get('/show/:id', (req, res) => {
     Paws.findById(req.params.id, (error, foundPet) => {
         res.render('main/show.ejs', {
-            data: foundPet,
+            pet: foundPet,
             currentUser: req.session.currentUser
         })
     })
@@ -114,16 +115,16 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
             Paws.insertMany([{
                 name: "Al Gore",
                 age: "1yr 2mo",
-                breed: "Something",
+                breed: "Rhodesian ridgeback",
                 image: "https://res.cloudinary.com/dhzjnizig/image/upload/v1609306061/paws/sample1_mnwkiz.jpg",
                 goodWithCats: true,
                 goodWithKids: true,
                 goodWithDogs: false,
                 description: "Great doggo from downtown"
             }, {
-                name: "handsomeboy",
+                name: "Big daddy",
                 age: "1yr 5mo",
-                breed: "snowman",
+                breed: "Spitz",
                 image: "https://res.cloudinary.com/dhzjnizig/image/upload/v1609306060/paws/sample2_tilhee.jpg",
                 goodWithCats: false,
                 goodWithKids: true,
@@ -140,8 +141,8 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 description: "Cutest little puppers that's not a frog"
             }, {
                 name: "Froggo",
-                age: "Unknown",
-                breed: "frogman",
+                age: "Who cares?",
+                breed: "Drog",
                 image: "https://res.cloudinary.com/dhzjnizig/image/upload/v1609306060/paws/sample4_ennrra.jpg",
                 goodWithCats: true,
                 goodWithKids: true,
@@ -196,7 +197,7 @@ router.get('/:page', (req, res) => {
     Paws.find({}, (err, found) => {
             setTimeout(function() {
                 userCreated = false;
-            }, 150);
+            }, 500);
             setTimeout((function() {
                 res.render('main/index.ejs', {
                     data: found,
