@@ -9,9 +9,9 @@
   <div id="container">
     <%- include ('../partials/nav.ejs') %>
     <br>
-    <div id="firstContainer" class="container-fluid" style="max-width: 700px; border-radius: 10px; padding: 10px;">
+    <div id="firstContainer" class="container-fluid" style="max-width: 500px; border-radius: 10px; padding: 10px;">
       <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-6">
           <a href="/main/<%=userPage%>"><i style="font-size: 2em;color: rgb(189, 189, 0);"
               class="fad fa-arrow-circle-left"></i></a>
           <br>
@@ -28,8 +28,9 @@
         <div class="col-sm-11" style="border-bottom: 2px solid black;">
         </div>
       </div>
+      <!-- Description -->
       <div class="row" style="margin-top: 10px;">
-        <div class="col-sm-8">
+        <div class="col-sm-11">
           <h5>Description</h5>
           <%=pet.description%>
         </div>
@@ -39,6 +40,7 @@
         <div class="col-sm-11" style="border-bottom: 2px solid black;">
         </div>
       </div>
+      <!-- Stats -->
       <div class="row" style="margin-top: 10px;">
         <div class="col-sm-12">
           Good with kids:
@@ -63,6 +65,31 @@
           <% } %>
         </div>
       </div>
+      <br>
+      <% if (currentUser) {%>
+      <div class="row">
+        <div class="col-sm-10" style="display: flex;">
+          <a class="btn btn-warning" href="/main/edit/<%=pet.id%>">Edit</a>
+          <form action="/main/show/<%=pet.id%>?_method=DELETE" method="POST" style="margin-left: 10px;">
+            <input class="btn btn-danger" type="submit" value="Delete">
+          </form>
+        </div>
+      </div>
+      <% } else {%>
+      <div class="row">
+        <div class="col-sm-10" style="display: flex;">
+          <a class="btn btn-warning disabled" href="/main/edit/<%=pet.id%>">Edit</a>
+          <form action="/main/show/<%=pet.id%>?_method=DELETE" method="POST" style="margin-left: 10px;">
+            <input class="btn btn-danger disabled" type="submit" value="Delete">
+          </form>
+        </div>
+        <div class="col-sm-12">
+          <p style="color: rgb(235, 86, 0);"><i class="fal fa-exclamation-triangle"></i> Please sign in to use these
+            features
+          </p>
+        </div>
+      </div>
+      <% } %>
     </div>
   </div>
 </body>

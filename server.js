@@ -63,6 +63,7 @@ app.use("/sessions", sessionsController);
 global.userCreated = false;
 global.maxProfiles = 40;
 global.userPage;
+global.defaultImage;
 
 
 

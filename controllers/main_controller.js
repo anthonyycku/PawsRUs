@@ -74,17 +74,41 @@ router.post('/new', parser.single("image"), (req, res) => {
 // EDIT
 router.get('/edit/:id', isAuthenticated, (req, res) => {
     Paws.findById(req.params.id, (error, foundPet) => {
+        defaultImage = foundPet.image;
         res.render('main/edit.ejs', {
-            data: foundPet,
+            pet: foundPet,
             currentUser: req.session.currentUser
         })
     })
 })
 
-router.put('/edit/:id', isAuthenticated, (req, res) => {
+router.put('/edit/:id', parser.single("image"), isAuthenticated, (req, res) => {
+    let result = req.body;
+
+    if (!req.file) {
+        result.image = defaultImage;
+    } else {
+        result.image = req.file.path;
+    }
+
+    if (result.goodWithKids === "on") {
+        result.goodWithKids = true;
+    } else {
+        result.goodWithKids = false;
+    }
+    if (result.goodWithDogs === "on") {
+        result.goodWithDogs = true;
+    } else {
+        result.goodWithDogs = false;
+    }
+    if (result.goodWithCats === "on") {
+        result.goodWithCats = true;
+    } else {
+        result.goodWithCats = false;
+    }
     Paws.findByIdAndUpdate(req.params.id, req.body, { new: true },
         (error, updatedModel) => {
-            res.redirect('/main')
+            res.redirect('/main/show/' + req.params.id)
         }
     )
 })
@@ -92,7 +116,7 @@ router.put('/edit/:id', isAuthenticated, (req, res) => {
 // DELETE
 router.delete('/show/:id', (req, res) => {
     Paws.findByIdAndRemove(req.params.id, (err, deletedPet) => {
-        res.redirect('/main')
+        res.redirect('/main/' + userPage)
     })
 })
 
@@ -171,7 +195,7 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
             })
         }
         setTimeout(function() {
-            res.redirect("/")
+            res.redirect("/main/" + userPage)
         }, 300)
     })
 
