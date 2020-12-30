@@ -3,7 +3,9 @@ const express = require('express');
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 const session = require("express-session");
+const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
+
 
 
 // CONFIGURATION
@@ -12,6 +14,11 @@ const app = express();
 const db = mongoose.connection;
 const PORT = process.env.PORT || 3000;
 const mongodbURI = process.env.MONGODBURI;
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 // MIDDLEWARE
 app.use(express.static("public"));
@@ -22,6 +29,7 @@ app.use(session({
     resave: false,
     saveUnitialized: false
 }));
+
 
 
 // DATABASE

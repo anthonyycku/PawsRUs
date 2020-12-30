@@ -113,12 +113,12 @@
           <%for (let pet of data) { %>
           <!-- Card -->
           <div class="card" style="width: 220px; margin: 20px 10px 0 10px;">
-            <img style="width: 220px; height: 200px;" src="/images/sample/<%=pet.image%>" class="card-img-top">
+            <img style="width: 220px; height: 200px;" src="<%=pet.image%>" class="card-img-top">
             <div class="card-body">
               <h5 class="card-title"><%=pet.name%></h5>
               <p class="card-text">Age: <%=pet.age%></p>
               <p class="card-text">Breed: <%=pet.breed%></p>
-              <a href="#" style="text-decoration: none;">More info...</a>
+              <a href="/main/show/<%=pet.id%>" style="text-decoration: none;">More info...</a>
             </div>
           </div>
           <!-- End of card -->

@@ -15,7 +15,7 @@
       </div>
       <h2>Add a new entry </h2>
       <br>
-      <form action="/main/new" method="POST">
+      <form action="/main/new" method="POST" enctype="multipart/form-data">
         <!-- NAME AND AGE -->
         <div class="row">
           <div class="col-sm-6">
@@ -75,6 +75,13 @@
             <div class="input-group">
               <span class="input-group-text">Description</span>
               <textarea name="description" class="form-control" aria-label="With textarea"></textarea>
+            </div>
+          </div>
+          <!-- IMAGE UPLOAD -->
+          <div class="row">
+            <div class="mb-3">
+              <label for="formFile" class="form-label">Upload Image:</label>
+              <input name="image" class="form-control" type="file" id="formFile">
             </div>
           </div>
           <!-- Submit -->

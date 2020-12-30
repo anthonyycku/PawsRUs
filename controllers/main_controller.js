@@ -1,7 +1,20 @@
 const express = require('express')
 const Paws = require('../models/pets.js')
 const router = express.Router()
+const cloudinary = require("cloudinary").v2;
+const multer = require("multer");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
+//
+
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: 'paws'
+    },
+});
+
+const parser = multer({ storage: storage });
 //AUTHENTICATE
 const isAuthenticated = (req, res, next) => {
     if (req.session.currentUser) {
@@ -23,12 +36,13 @@ router.get('/new', isAuthenticated, (req, res) => {
     })
 })
 
-router.post('/new', (req, res) => {
+router.post('/new', parser.single("image"), (req, res) => {
     let result = req.body;
 
-    if (result.image === "") {
-        result.image = "na.jpeg";
-    }
+    cloudinary.uploader.upload(req.file.image,
+        function(error, result) { console.log(result, error) });
+
+    result.image = req.file.path;
     if (result.goodWithKids === "on") {
         result.goodWithKids = true;
     } else {
@@ -101,7 +115,7 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 name: "Al Gore",
                 age: "1yr 2mo",
                 breed: "Something",
-                image: "sample1.jpg",
+                image: "https://res.cloudinary.com/dhzjnizig/image/upload/v1609306061/paws/sample1_mnwkiz.jpg",
                 goodWithCats: true,
                 goodWithKids: true,
                 goodWithDogs: false,
@@ -110,7 +124,7 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 name: "handsomeboy",
                 age: "1yr 5mo",
                 breed: "snowman",
-                image: "sample2.jpg",
+                image: "https://res.cloudinary.com/dhzjnizig/image/upload/v1609306060/paws/sample2_tilhee.jpg",
                 goodWithCats: false,
                 goodWithKids: true,
                 goodWithDogs: false,
@@ -119,7 +133,7 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 name: "puppy",
                 age: "2mo",
                 breed: "Mixed",
-                image: "sampl3.jpeg",
+                image: "https://res.cloudinary.com/dhzjnizig/image/upload/v1609306060/paws/sample3_agvf1f.jpg",
                 goodWithCats: false,
                 goodWithKids: true,
                 goodWithDogs: false,
@@ -128,7 +142,7 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 name: "Froggo",
                 age: "Unknown",
                 breed: "frogman",
-                image: "sample4.jpg",
+                image: "https://res.cloudinary.com/dhzjnizig/image/upload/v1609306060/paws/sample4_ennrra.jpg",
                 goodWithCats: true,
                 goodWithKids: true,
                 goodWithDogs: true,
@@ -137,7 +151,7 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 name: "Slim Jim",
                 age: "13yr",
                 breed: "Longneckboy",
-                image: "sample5.jpg",
+                image: "https://res.cloudinary.com/dhzjnizig/image/upload/v1609306061/paws/sample5_lljpt6.jpg",
                 goodWithCats: false,
                 goodWithKids: false,
                 goodWithDogs: false,
@@ -146,16 +160,18 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 name: "Tubs",
                 age: "3yr",
                 breed: "SleepyBoy",
-                image: "sample6.jpeg",
+                image: "https://res.cloudinary.com/dhzjnizig/image/upload/v1609306060/paws/sample6_axhlhg.jpg",
                 goodWithCats: true,
                 goodWithKids: true,
                 goodWithDogs: false,
-                description: "Sleeps all day and will eat your pasta"
+                description: "Sleeps all day and will eat your foot"
             }], (error, data) => {
 
             })
         }
-        res.redirect("/");
+        setTimeout(function() {
+            res.redirect("/")
+        }, 300)
     })
 
 })
@@ -190,7 +206,7 @@ router.get('/:page', (req, res) => {
                     results: numberOfProfiles,
                     userCreated: userCreated
                 })
-            }), 100);
+            }), 250);
         })
         .skip((perPage * page) - (perPage))
         .limit(perPage);

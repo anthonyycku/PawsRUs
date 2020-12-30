@@ -16,10 +16,7 @@
         <i class="fas fa-user-circle"></i> Welcome <%=currentUser.username%>!
       </button>
       <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-        <li><a class="dropdown-item" href="#">Profile</a></li>
-        <li>
-          <hr class="dropdown-divider">
-        </li>
+
         <li>
           <form action="/sessions?_method=DELETE" method="POST">
             <button class="dropdown-item"><i class="fas fa-sign-out"> Log out</i></button>
