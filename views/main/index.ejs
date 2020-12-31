@@ -17,8 +17,8 @@
 <body>
 
   <!-- Toast -->
-  <%if (userCreated) { %>
-  <div style="z-index: 1; position: absolute; top: 70px; right: 0;" class="toast" role="alert" aria-live="assertive"
+  <%if (!userCreated) { %>
+  <div style="z-index: 1; position: absolute; top: 10px; left: 10px;" class="toast" role="alert" aria-live="assertive"
     aria-atomic="true">
     <div class="toast-header" style="color: green;">
       <i class="fas fa-check-circle">- </i>
