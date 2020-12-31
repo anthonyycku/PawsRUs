@@ -31,6 +31,34 @@
   </div>
   <% } %>
 
+  <%if (justDeleted) { %>
+  <div style="z-index: 1; position: absolute; top: 10px; left: 10px;" class="toast" role="alert" aria-live="assertive"
+    aria-atomic="true">
+    <div class="toast-header" style="color: red;">
+      <i class="fas fa-check-circle">- </i>
+      <strong class="me-auto">Entry deleted!</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Entry successfully deleted.
+    </div>
+  </div>
+  <% } %>
+
+  <%if (justCreated) { %>
+  <div style="z-index: 1; position: absolute; top: 10px; left: 10px;" class="toast" role="alert" aria-live="assertive"
+    aria-atomic="true">
+    <div class="toast-header" style="color: green;">
+      <i class="fas fa-check-circle">- </i>
+      <strong class="me-auto">Entry created!!</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Entry successfully created.
+    </div>
+  </div>
+  <% } %>
+
   <div id="container">
     <%- include ('../partials/nav.ejs') %>
     <br>

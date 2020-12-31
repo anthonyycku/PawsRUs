@@ -62,6 +62,7 @@ router.post('/new', parser.single("image"), (req, res) => {
     Paws.countDocuments({}, (err, count) => {
         if (count < maxProfiles) {
             Paws.create(req.body, (error, createdPet) => {
+                justCreated = true;
                 res.redirect('/')
             })
         } else {
@@ -108,6 +109,7 @@ router.put('/edit/:id', parser.single("image"), isAuthenticated, (req, res) => {
     }
     Paws.findByIdAndUpdate(req.params.id, req.body, { new: true },
         (error, updatedModel) => {
+            justEdited = true;
             res.redirect('/main/show/' + req.params.id)
         }
     )
@@ -116,12 +118,16 @@ router.put('/edit/:id', parser.single("image"), isAuthenticated, (req, res) => {
 // DELETE
 router.delete('/show/:id', (req, res) => {
     Paws.findByIdAndRemove(req.params.id, (err, deletedPet) => {
+        justDeleted = true;
         res.redirect('/main/' + userPage)
     })
 })
 
 // SHOW
 router.get('/show/:id', (req, res) => {
+    setTimeout(function() {
+        justEdited = false;
+    }, 250);
     Paws.findById(req.params.id, (error, foundPet) => {
         res.render('main/show.ejs', {
             pet: foundPet,
@@ -195,6 +201,7 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
             })
         }
         setTimeout(function() {
+            justCreated = true;
             res.redirect("/main/" + userPage)
         }, 300)
     })
@@ -204,6 +211,7 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
 // NUKE ROUTE
 router.delete("/setup/nuke", isAuthenticated, (req, res) => {
     Paws.deleteMany({}, (err, deleted) => {
+        justDeleted = true;
         res.redirect("/");
     })
 })
@@ -230,6 +238,8 @@ router.get('/:page', (req, res) => {
             userPage = page;
             setTimeout(function() {
                 userCreated = false;
+                justDeleted = false;
+                justCreated = false;
             }, 500);
             setTimeout((function() {
                 res.render('main/index.ejs', {
