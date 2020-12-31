@@ -219,6 +219,7 @@ router.get('/:page', (req, res) => {
     })
 
     Paws.find({}, (err, found) => {
+            userPage = page;
             setTimeout(function() {
                 userCreated = false;
             }, 500);
