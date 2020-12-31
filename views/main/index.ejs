@@ -35,66 +35,73 @@
     <%- include ('../partials/nav.ejs') %>
     <br>
     <!-- header bar -->
-    <div class="container-fluid" style="max-width: 1100px;">
-      <div class="row">
-        <div id="headerBar" class="col-md-6" style="height: 80px;">
-          <h1 style="font-size: 4em; text-align: center; color:#003664">Adopt</h1>
-        </div>
-      </div>
-    </div>
     <!-- Main content -->
     <div id="firstContainer" class="container-fluid" style="max-width: 1100px;">
+      <!-- Header Row -->
+      <div class="row">
+        <div id="headerBar" class="col-sm-6 activeBox" style="height: 80px; background-color: rgb(194, 194, 194)">
+          <h1 style="height: 80px; font-size: 4em; text-align: center; color:#003664">Adopt</h1>
+        </div>
+        <div id="headerBar" class="col-sm-6" style="height: 80px; padding: 0;">
+          <a href="/main/about/" style="text-decoration: none;">
+            <h1 class="inactiveBox" style="height: 80px; font-size: 4em; text-align: center; color:#003664">About</h1>
+          </a>
+        </div>
+      </div>
       <!-- admin Row -->
       <div class="row">
         <!-- User Panel -->
         <div class="row" style="justify-content: center; display: flex; margin: 20px 0 10px 0;">
           <div class="col-sm-10">
-
-            <div class="accordion-item" style="background-color: white;">
-              <h2 class="accordion-header" id="headingOne">
-                <button class=" accordion-button btn-success" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="padding: 5px;">
-                  <h4><i class="far fa-info-circle"> User Panel</i></h4>
-                </button>
-              </h2>
-              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  <% if (!currentUser) { %>
-                  <h5 style="color: rgb(235, 86, 0);"><i class="fal fa-exclamation-triangle"></i> Please create an
-                    account and
-                    sign in to use the panel
-                  </h5>
-                  <% } %>
-
-                  <form action="/main/new" style="margin-right: 20px; display: inline-block;">
-                    <% if (currentUser) { %>
-                    <input type="submit" class="btn btn-warning" value="Create new data">
-                    <% } else { %>
-                    <input type="submit" class="btn btn-warning disabled" value="Create new data">
+            <div class="accordion" id="accordionExample">
+              <div class="accordion-item" style="background-color: white;">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class=" accordion-button btn-success" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
+                    style="padding: 5px;">
+                    <h4><i class="far fa-info-circle"> User Panel</i></h4>
+                  </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                  data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <% if (!currentUser) { %>
+                    <h5 style="color: rgb(235, 86, 0);"><i class="fal fa-exclamation-triangle"></i> Please create an
+                      account and
+                      sign in to use the panel
+                    </h5>
                     <% } %>
-                  </form>
-                  <form action="/main/setup/seed" style="margin-right: 20px; display: inline-block;">
-                    <% if (currentUser) { %>
-                    <input type="submit" class="btn btn-success" value="Seed sample data">
-                    <% } else { %>
-                    <input type="submit" class="btn btn-success disabled" value="Seed sample data">
-                    <% } %>
-                  </form>
-                  <form action="/main/setup/nuke?_method=DELETE" method="POST"
-                    style="margin-top: 10px; display: inline-block;">
-                    <% if (currentUser) { %>
-                    <input type="submit" class="btn btn-danger" value="Clear all data">
-                    <% } else { %>
-                    <input type="submit" class="btn btn-danger disabled" value="Clear all data">
-                    <% } %>
-                  </form>
 
-                  <div class="row" style="margin-top: 10px;">
-                    <div class="col-sm-12">
-                      <p>Note: Maximum of 40 entries displayed. Newly created entries will not display when 40 entries
-                        already exist.</p>
-                      <p>Use <code>[Clear all data]</code> to clear the entries.</p>
+                    <form action="/main/new" style="margin-right: 20px; display: inline-block;">
+                      <% if (currentUser) { %>
+                      <input type="submit" class="btn btn-warning" value="Create new data">
+                      <% } else { %>
+                      <input type="submit" class="btn btn-warning disabled" value="Create new data">
+                      <% } %>
+                    </form>
+                    <form action="/main/setup/seed" style="margin-right: 20px; display: inline-block;">
+                      <% if (currentUser) { %>
+                      <input type="submit" class="btn btn-success" value="Seed sample data">
+                      <% } else { %>
+                      <input type="submit" class="btn btn-success disabled" value="Seed sample data">
+                      <% } %>
+                    </form>
+                    <form action="/main/setup/nuke?_method=DELETE" method="POST"
+                      style="margin-top: 10px; display: inline-block;">
+                      <% if (currentUser) { %>
+                      <input type="submit" class="btn btn-danger" value="Clear all data">
+                      <% } else { %>
+                      <input type="submit" class="btn btn-danger disabled" value="Clear all data">
+                      <% } %>
+                    </form>
+
+                    <div class="row" style="margin-top: 10px;">
+                      <div class="col-sm-12">
+                        <p style="margin:0;">Note: Maximum of 40 entries displayed. Newly created entries will not
+                          display when 40 entries
+                          already exist.</p>
+                        <p>Use <code>[Clear all data]</code> to clear the entries.</p>
+                      </div>
                     </div>
                   </div>
                 </div>

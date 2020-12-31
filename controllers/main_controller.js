@@ -208,6 +208,14 @@ router.delete("/setup/nuke", isAuthenticated, (req, res) => {
     })
 })
 
+// ABOUT 
+router.get("/about", (req, res) => {
+    res.render("main/about.ejs", {
+        currentUser: req.session.currentUser
+    })
+})
+
+
 // INDEX
 router.get('/:page', (req, res) => {
     const perPage = 4;
@@ -237,5 +245,7 @@ router.get('/:page', (req, res) => {
         .skip((perPage * page) - (perPage))
         .limit(perPage);
 })
+
+
 
 module.exports = router;
