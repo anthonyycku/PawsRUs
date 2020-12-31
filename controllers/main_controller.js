@@ -218,7 +218,7 @@ router.get("/about", (req, res) => {
 
 // INDEX
 router.get('/:page', (req, res) => {
-    const perPage = 4;
+    const perPage = 8;
     const page = req.params.page || 1;
     let numberOfProfiles = 0;
 
