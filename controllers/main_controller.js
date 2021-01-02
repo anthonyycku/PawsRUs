@@ -248,12 +248,19 @@ router.get('/:page', (req, res) => {
                     currentPage: parseInt(page),
                     pages: Math.ceil(numberOfProfiles / perPage),
                     results: numberOfProfiles,
-                    userCreated: userCreated
+                    userCreated: userCreated,
+                    toggleAccordion: toggleAccordion
                 })
             }), 250);
         })
         .skip((perPage * page) - (perPage))
         .limit(perPage);
+
+})
+
+router.post("/:page", (req, res) => {
+    toggleAccordion = req.body.toggle;
+    res.redirect("/main/" + req.params.page)
 })
 
 

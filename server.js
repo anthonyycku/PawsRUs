@@ -65,6 +65,7 @@ global.justDeleted = false;
 global.justCreated = false;
 global.justEdited = false;
 global.maxProfiles = 40;
+global.toggleAccordion = false;
 global.userPage;
 global.defaultImage;
 

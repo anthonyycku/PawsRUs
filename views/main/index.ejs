@@ -15,7 +15,6 @@
 </script>
 
 <body>
-
   <!-- Toast -->
   <%if (userCreated) { %>
   <div style="z-index: 1; position: absolute; top: 10px; left: 10px;" class="toast" role="alert" aria-live="assertive"
@@ -58,6 +57,7 @@
     </div>
   </div>
   <% } %>
+  <!-- End of Toast -->
 
   <div id="container">
     <%- include ('../partials/nav.ejs') %>
@@ -88,14 +88,23 @@
             <div class="accordion" id="accordionExample">
               <div class="accordion-item" style="background-color: white;">
                 <h2 class="accordion-header" id="headingOne">
-                  <button class=" accordion-button btn-success" type="button" data-bs-toggle="collapse"
+                  <button class="accordion-button btn-success" type="button" data-bs-toggle="collapse"
                     data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
                     style="padding: 5px;">
-                    <h4><i class="far fa-info-circle"> User Panel</i> - Click here to get started!</h4>
+                    <h4><i class="far fa-info-circle"></i> User Panel - Click here to get started!</h4>
                   </button>
                 </h2>
+                <!-- accordion toggle -->
+                <% if (toggleAccordion) { %>
+                <form action="/main/<%=currentPage%>" method="POST">
+                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                    data-bs-parent="#accordionExample">
+                </form>
+                <% } else { %>
                 <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
                   data-bs-parent="#accordionExample">
+                  <% } %>
+                  <!-- end of accordion toggle -->
                   <div class="accordion-body">
                     <% if (!currentUser) { %>
                     <h5 style="color: rgb(235, 86, 0);"><i class="fal fa-exclamation-triangle"></i> Please create an
@@ -152,7 +161,8 @@
           <%for (let pet of data) { %>
           <!-- Card -->
           <div class="card" style="width: 220px; margin: 20px 10px 0 10px;">
-            <img style="width: 217px; height: 200px;" src="<%=pet.image%>" class="card-img-top">
+            <a href="/main/show/<%=pet.id%>"> <img style="width: 217px; height: 200px;" src="<%=pet.image%>"
+                class="card-img-top"></a>
             <div class="card-body">
               <h5 class="card-title"><%=pet.name%></h5>
               <p class="card-text">Age: <%=pet.age%></p>
@@ -169,7 +179,8 @@
     </div> <!-- End of Main content-->
 
   </div>
-  </div>
+  <!--End of container-->
+
 </body>
 
 </html>
