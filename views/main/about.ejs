@@ -10,27 +10,27 @@
         <%- include ('../partials/nav.ejs') %>
 
         <br>
+
         <div id="firstContainer" class="container-fluid" style="max-width: 1100px;">
-            <!-- Header Row -->
+
             <div class="row">
-                <a href="/" style="text-decoration: none;">
-                    <div id="headerBar" class="col-sm-6 activeBox"
-                        style="height: 80px; background-color: rgb(194, 194, 194)">
-                        <h1 style="height: 80px; font-size: 3.5em; text-align: center; color:#003664">
-                            <i class="fas fa-dog"></i> Adopt
-                        </h1>
-                </a>
+                <div id="headerBar" class="col-sm-6" height: 80px; padding: 0;>
+                    <h1 style="height: 80px; font-size: 3.5em; text-align: center; color:#003664">
+                        <i class="fas fa-info-square"></i> About
+                    </h1>
+                </div>
+
+                <div id="headerBar" class="col-sm-6 activeBox"
+                    style="height: 80px; padding: 0;background-color: rgb(194, 194, 194)">
+                </div>
             </div>
-            <div id="headerBar" class="col-sm-6 style=" height: 80px; padding: 0;">
-                <h1 style="height: 80px; font-size: 3.5em; text-align: center; color:#003664">
-                    <i class="fas fa-info-square"></i> About
-                </h1>
-            </div>
+
             <div class="row">
                 <div class="col-sm-12">
                     <div class="alert alert-info" role="alert">
                         <h3 class="alert-heading">About this project</h3>
-                        <p>Hi there! Welcome to my project, Paws R Us. This project aims to simulate an animal shelter
+                        <p>Hi there! Welcome to my project, Paws R Us. This project aims to simulate an animal
+                            shelter
                             adoption website, built with full CRUD operations and REST API.</p>
 
                         <hr>
@@ -61,14 +61,18 @@
                         <h5><strong> Overview</strong></h5>
                         <ul>
                             <li>User must sign up for a new account and sign in to access certain features</li>
-                            <li>Signed in users can create new data, seed sample data, and delete any and all current
-                                documents</li>
-                            <li>Pop ups are displayed on the top left with a lifespan of 10 seconds when users create a
+                            <li>Signed in users can create new data, seed sample data, and delete any and all
+                                current
+                                documents.</li>
+                            <li>Signed in users can favorite profiles and access the favorites tab</li>
+                            <li>Pop ups are displayed on the top left with a lifespan of 10 seconds when users
+                                create a
                                 new account, create, edit, or delete items</li>
                         </ul>
                         <h5>- Sign up page</h5>
                         <ul>
-                            <li>Username validation: No symbols / capitalizations, 4-12 characters and at least 1 letter
+                            <li>Username validation: No symbols / capitalizations, 4-12 characters and at least 1
+                                letter
                             </li>
                             <li>Password validation: At least 4 characters long</li>
                             <li>Confirm password validation</li>
@@ -81,10 +85,18 @@
                         </ul>
                         <h5>- Index page</h5>
                         <ul>
-                            <li>User Panel: Created using bootstrap accordion, allowing signed-in users to create, seed,
+                            <li>User Panel: Created using bootstrap accordion, allowing signed-in users to create,
+                                seed,
                                 and delete data</li>
                             <li>Profile cards: Created using bootstrap cards</li>
                             <li>Pagination: Created from scratch, allowing up to 8 profiles per page</li>
+                        </ul>
+                        <h5>- Favorites page</h5>
+                        <ul>
+                            <li>
+                                Favorite button: Allows users to favorite/unfavorite profiles to add/remove them
+                                from the user's favorites page
+                            </li>
                         </ul>
                         <h5>- Third party apps</h5>
                         <ul>
@@ -104,7 +116,8 @@
                         </ul>
                         <h5>Edit page (Update)</h5>
                         <ul>
-                            <li>Displays form for user input- fields are filled with document's current information</li>
+                            <li>Displays form for user input- fields are filled with document's current information
+                            </li>
                             <li>Image is kept the same if user fails to upload new image</li>
                         </ul>
                         <h5>Delete button (Delete)</h5>
@@ -115,7 +128,8 @@
                 </div>
             </div>
         </div>
-    </div>
+
+
 
 </body>
 

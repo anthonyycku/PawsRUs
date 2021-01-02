@@ -11,7 +11,8 @@ const petSchema = new mongoose.Schema({
     image: String,
     goodWithKids: Boolean,
     goodWithDogs: Boolean,
-    goodWithCats: Boolean
+    goodWithCats: Boolean,
+    favoritedBy: [String]
 })
 
 const Pet = mongoose.model('pawsrus', petSchema)

@@ -27,6 +27,70 @@ const isAuthenticated = (req, res, next) => {
 //             ROUTES           //
 //////////////////////////////////
 
+//FAVORITES
+
+router.get("/favorites", isAuthenticated, (req, res) => {
+    latestPage = "/main/favorites";
+    if (req.session.currentUser) {
+        let result = [];
+        let currentUsername = req.session.currentUser.username;
+
+        Paws.find({}, (err, found) => {
+            for (let pet of found) {
+                if (pet.favoritedBy) {
+                    if (pet.favoritedBy.includes(currentUsername)) {
+                        result.push(pet);
+                    }
+                }
+            }
+        })
+        setTimeout(function() {
+            res.render("main/favorite.ejs", {
+                currentUser: req.session.currentUser,
+                data: result,
+                dataLength: result.length
+            })
+        }, 300)
+    }
+});
+
+router.get("/favorites/:id", isAuthenticated, (req, res) => {
+    let currentUsername = req.session.currentUser.username;
+
+    Paws.findById(req.params.id, (err, found) => {
+        if (!found.favoritedBy.includes(currentUsername)) {
+            found.favoritedBy.push(currentUsername);
+            found.save();
+        } else {
+            let userIndex = found.favoritedBy.indexOf(currentUsername);
+            found.favoritedBy.splice(userIndex, 1);
+            found.save();
+        }
+    })
+    setTimeout(function() {
+        res.redirect("/main/" + userPage);
+    }, 200)
+});
+
+router.get("/favorites2/:id", isAuthenticated, (req, res) => {
+    let currentUsername = req.session.currentUser.username;
+
+    Paws.findById(req.params.id, (err, found) => {
+        if (!found.favoritedBy.includes(currentUsername)) {
+            found.favoritedBy.push(currentUsername);
+            found.save();
+        } else {
+            let userIndex = found.favoritedBy.indexOf(currentUsername);
+            found.favoritedBy.splice(userIndex, 1);
+            found.save();
+        }
+    })
+    setTimeout(function() {
+        res.redirect("/main/favorites");
+    }, 200)
+});
+
+
 
 // NEW
 router.get('/new', isAuthenticated, (req, res) => {
@@ -37,6 +101,8 @@ router.get('/new', isAuthenticated, (req, res) => {
 
 router.post('/new', parser.single("image"), (req, res) => {
     let result = req.body;
+
+    result.favoritedBy = [];
 
     if (!req.file) {
         result.image = "/images/sample/na.jpeg";
@@ -131,7 +197,8 @@ router.get('/show/:id', (req, res) => {
     Paws.findById(req.params.id, (error, foundPet) => {
         res.render('main/show.ejs', {
             pet: foundPet,
-            currentUser: req.session.currentUser
+            currentUser: req.session.currentUser,
+            latestPage: latestPage
         })
     })
 })
@@ -150,7 +217,8 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithCats: true,
                 goodWithKids: true,
                 goodWithDogs: false,
-                description: "Great doggo from downtown"
+                description: "Great doggo from downtown",
+                favoritedBy: []
             }, {
                 name: "Big daddy",
                 age: "1yr 5mo",
@@ -159,7 +227,8 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithCats: false,
                 goodWithKids: true,
                 goodWithDogs: false,
-                description: "Most handsome dog in chinatown"
+                description: "Most handsome dog in chinatown",
+                favoritedBy: []
             }, {
                 name: "puppy",
                 age: "2mo",
@@ -168,7 +237,8 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithCats: false,
                 goodWithKids: true,
                 goodWithDogs: false,
-                description: "Cutest little puppers that's not a frog"
+                description: "Cutest little puppers that's not a frog",
+                favoritedBy: []
             }, {
                 name: "Froggo",
                 age: "Who cares?",
@@ -177,7 +247,8 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithCats: true,
                 goodWithKids: true,
                 goodWithDogs: true,
-                description: "Don't know if this guy is a frog or a cow"
+                description: "Don't know if this guy is a frog or a cow",
+                favoritedBy: []
             }, {
                 name: "Slim Jim",
                 age: "13yr",
@@ -186,7 +257,8 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithCats: false,
                 goodWithKids: false,
                 goodWithDogs: false,
-                description: "His tongue can whip you senseless"
+                description: "His tongue can whip you senseless",
+                favoritedBy: []
             }, {
                 name: "Tubs",
                 age: "3yr",
@@ -195,7 +267,8 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithCats: true,
                 goodWithKids: true,
                 goodWithDogs: false,
-                description: "Sleeps all day and will eat your foot"
+                description: "Sleeps all day and will eat your foot",
+                favoritedBy: []
             }], (error, data) => {
 
             })
@@ -224,6 +297,7 @@ router.get("/about", (req, res) => {
 })
 
 
+
 // INDEX
 router.get('/:page', (req, res) => {
     const perPage = 8;
@@ -236,6 +310,7 @@ router.get('/:page', (req, res) => {
 
     Paws.find({}, (err, found) => {
             userPage = page;
+            latestPage = "/main/" + page;
             setTimeout(function() {
                 userCreated = false;
                 justDeleted = false;
@@ -257,12 +332,6 @@ router.get('/:page', (req, res) => {
         .limit(perPage);
 
 })
-
-router.post("/:page", (req, res) => {
-    toggleAccordion = req.body.toggle;
-    res.redirect("/main/" + req.params.page)
-})
-
 
 
 module.exports = router;

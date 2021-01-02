@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <%- include ('../partials/head.ejs') %>
+</head>
+
+
+<body>
+
+    <div id="container">
+        <%- include ('../partials/nav.ejs') %>
+        <br>
+
+        <div id="firstContainer" class="container-fluid" style="max-width: 1100px;">
+            <!-- Header Row -->
+            <div class="row">
+                <a href="/" style="text-decoration: none;">
+                    <div id="headerBar" class="col-sm-6 activeBox"
+                        style="height: 80px; background-color: rgb(194, 194, 194)">
+                        <h1 style="height: 80px; font-size: 3.5em; text-align: center; color:#003664">
+                            <i class="fas fa-dog"></i> Adopt
+                        </h1>
+                </a>
+            </div>
+            <div id="headerBar" class="col-sm-6 style=" height: 80px; padding: 0;">
+                <h1 style="height: 80px; font-size: 3.5em; text-align: center; color:#003664">
+                    <i class="fad fa-heart-circle"></i> Favorites
+                </h1>
+            </div>
+            <!-- End of header row -->
+
+
+            <div class="row">
+                <div class="col-sm-6">
+                </div>
+            </div>
+            <div class="row" style="display: flex; justify-content: center; min-height: 200px;">
+                <!-- Article -->
+                <div class="col-sm-11" style="display: flex; flex-wrap: wrap;">
+                    <%if (dataLength === 0) { %>
+                    <h3>You have no favorites right now. Start clicking on the hearts to add them to your favorites
+                        list!</h3>
+                    <% } %>
+
+
+                    <%for (let pet of data) { %>
+                    <!-- Card -->
+                    <div class="card" style="width: 220px; margin: 20px 10px 20px 10px;">
+                        <a href="/main/show/<%=pet.id%>"> <img style="width: 217px; height: 200px;" src="<%=pet.image%>"
+                                class="card-img-top"></a>
+                        <div class="card-body">
+                            <h5 class="card-title" style="display: inline-block;"><%=pet.name%></h5>
+                            <a style="text-decoration: none;" href="/main/favorites2/<%=pet.id%>"><i
+                                    style="font-size: 1.5em;color:rgb(255, 112, 136);"
+                                    class="fad fa-heart-circle"></i></a>
+
+                            <p style="margin: 0;" class="card-text">Age: <%=pet.age%></p>
+                            <p class="card-text">Breed: <%=pet.breed%></p>
+                            <a href="/main/show/<%=pet.id%>" style="text-decoration: none;">More info...</a>
+                        </div>
+                    </div>
+                    <!-- End of card -->
+                    <% } %>
+                </div>
+            </div>
+        </div> <!-- End of Main content-->
+
+    </div>
+    <!--End of container-->
+
+</body>
+
+</html>

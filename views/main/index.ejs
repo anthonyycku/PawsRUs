@@ -73,9 +73,9 @@
         </div>
         <div id="headerBar" class="col-sm-6 activeBox"
           style="height: 80px; padding: 0;background-color: rgb(194, 194, 194)">
-          <a href="/main/about/" style="text-decoration: none;">
+          <a href="/main/favorites" style="text-decoration: none;">
             <h1 style="height: 80px; font-size: 3.5em; text-align: center; color:#003664"><i
-                class="fas fa-info-square"></i> About</h1>
+                class="fad fa-heart-circle"></i> Favorites</h1>
           </a>
         </div>
       </div>
@@ -164,8 +164,22 @@
             <a href="/main/show/<%=pet.id%>"> <img style="width: 217px; height: 200px;" src="<%=pet.image%>"
                 class="card-img-top"></a>
             <div class="card-body">
-              <h5 class="card-title"><%=pet.name%></h5>
-              <p class="card-text">Age: <%=pet.age%></p>
+              <h5 class="card-title" style="display: inline-block"><%=pet.name%></h5>
+              <!-- Favorite -->
+              <% if (currentUser) { %>
+              <%if (pet.favoritedBy.includes(currentUser.username)) {%>
+              <a style="text-decoration: none; display: inline-block;" href="/main/favorites/<%=pet.id%>"><i
+                  style="font-size: 1.5em;color:rgb(255, 112, 136);" class="fad fa-heart-circle"></i></a>
+              <% } else {%>
+              <a style="text-decoration: none; display: inline-block;" href="/main/favorites/<%=pet.id%>"><i
+                  style="font-size: 1.5em;" class="fad fa-heart-circle"></i></a>
+              <% } %>
+              <% } else {%>
+              <i style="font-size: 1.5em; display: inline-block;" class="fad fa-heart-circle"></i>
+              <% } %>
+              <!-- End of favorite -->
+
+              <p style="margin: 0;" class="card-text">Age: <%=pet.age%></p>
               <p class="card-text">Breed: <%=pet.breed%></p>
               <a href="/main/show/<%=pet.id%>" style="text-decoration: none;">More info...</a>
             </div>
