@@ -1,19 +1,19 @@
 About this project
-Hi there! Welcome to my project, Paws R Us. This project aims to simulate an animal shelter adoption website, built with full CRUD operations and REST API.
+-Hi there! Welcome to my project, Paws R Us. This project aims to simulate an animal shelter adoption website, built with full CRUD operations and REST API.
 
 Project Stack
 Back-end
-Node.js Express
-MongoDB Atlas / Mongoose
-Bcrypt - Password hash
+-Node.js Express
+-MongoDB Atlas / Mongoose
+-Bcrypt - Password hash
 Front-end
-Embedded Javascript (EJS)
-jQuery
-CSS
-Bootstrap v5.0 framework
+-Embedded Javascript (EJS)
+-jQuery
+-CSS
+-Bootstrap v5.0 framework
 Third party services
-Cloudinary - Media database
-Multer - Middleware for handling multipart data
+-Cloudinary - Media database
+-Multer - Middleware for handling multipart data
 Deployed via Heroku
 GitHub Repository
 Please visit my GitHub here for more insight into this application.
