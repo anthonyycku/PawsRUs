@@ -226,18 +226,28 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 image: "https://res.cloudinary.com/dhzjnizig/image/upload/v1609306060/paws/sample2_tilhee.jpg",
                 goodWithCats: false,
                 goodWithKids: true,
-                goodWithDogs: false,
+                goodWithDogs: true,
                 description: "Most handsome dog in chinatown",
                 favoritedBy: []
             }, {
-                name: "puppy",
-                age: "2mo",
-                breed: "Mixed",
-                image: "https://res.cloudinary.com/dhzjnizig/image/upload/v1609306060/paws/sample3_agvf1f.jpg",
-                goodWithCats: false,
-                goodWithKids: true,
+                name: "Polo",
+                age: "10yr",
+                breed: "Klee Kai",
+                image: "https://res.cloudinary.com/dhzjnizig/image/upload/v1609579864/paws/wq2vlji69xpv0sbnmnaf.jpg",
+                goodWithCats: true,
+                goodWithKids: false,
                 goodWithDogs: false,
-                description: "Cutest little puppers that's not a frog",
+                description: "Absolutely hates kids",
+                favoritedBy: []
+            }, {
+                name: "Not Polo",
+                age: "10yr",
+                breed: "CORGI??",
+                image: "https://res.cloudinary.com/dhzjnizig/image/upload/v1609360932/paws/ub7woh8lxykdijj2xnns.jpg",
+                goodWithCats: true,
+                goodWithKids: false,
+                goodWithDogs: false,
+                description: "Is he disguised?",
                 favoritedBy: []
             }, {
                 name: "Froggo",
@@ -269,7 +279,37 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithDogs: false,
                 description: "Sleeps all day and will eat your foot",
                 favoritedBy: []
-            }], (error, data) => {
+            }, {
+                name: "Nemo",
+                age: "4yr 1mo",
+                breed: "Catman",
+                image: "https://res.cloudinary.com/dhzjnizig/image/upload/v1609457423/paws/ec8y12ahu9m1og8j5n99.jpg",
+                goodWithCats: true,
+                goodWithKids: true,
+                goodWithDogs: false,
+                description: "This is a cat, not a dog!",
+                favoritedBy: []
+            }, {
+                name: "Meeeeeeep",
+                age: "6mo",
+                breed: "Shiba",
+                image: "https://res.cloudinary.com/dhzjnizig/image/upload/v1609361060/paws/y4gfkog5kc4xwjns1jvg.jpg",
+                goodWithCats: true,
+                goodWithKids: true,
+                goodWithDogs: false,
+                description: "This guy stretches.",
+                favoritedBy: []
+            }, {
+                name: "Puppers",
+                age: "2mo",
+                breed: "Mixed",
+                image: "https://res.cloudinary.com/dhzjnizig/image/upload/v1609306060/paws/sample3_agvf1f.jpg",
+                goodWithCats: false,
+                goodWithKids: true,
+                goodWithDogs: false,
+                description: "Cutest little puppers that's not a frog",
+                favoritedBy: []
+            }, ], (error, data) => {
 
             })
         }
