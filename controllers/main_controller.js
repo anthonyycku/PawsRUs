@@ -63,7 +63,6 @@ router.get("/logs/:id", isAuthenticated, (req, res) => {
 router.put("/logs/:id", isAuthenticated, (req, res) => {
     Paws.findById(req.params.id, (err, found) => {
         let currentID = req.body.logID
-        console.log(currentID);
         found.logs = found.logs.filter(log => log.id !== currentID);
         found.save();
     })
