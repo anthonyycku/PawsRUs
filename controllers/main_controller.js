@@ -196,7 +196,7 @@ router.post('/new', parser.single("image"), (req, res) => {
         if (count < maxProfiles) {
             Paws.create(req.body, (error, createdPet) => {
                 justCreated = true;
-                res.redirect('/')
+                res.redirect('/main/show/' + createdPet.id)
             })
         } else {
             res.redirect("/");
@@ -260,12 +260,14 @@ router.delete('/show/:id', (req, res) => {
 router.get('/show/:id', (req, res) => {
     setTimeout(function() {
         justEdited = false;
+        userCreated = false;
     }, 250);
     Paws.findById(req.params.id, (error, foundPet) => {
         res.render('main/show.ejs', {
             pet: foundPet,
             currentUser: req.session.currentUser,
             latestPage: latestPage,
+            justCreated: justCreated,
             comments: foundPet.logs.length
         })
     })
@@ -432,9 +434,7 @@ router.get('/:page', (req, res) => {
             userPage = page;
             latestPage = "/main/" + page;
             setTimeout(function() {
-                userCreated = false;
                 justDeleted = false;
-                justCreated = false;
             }, 500);
             setTimeout((function() {
                 res.render('main/index.ejs', {
