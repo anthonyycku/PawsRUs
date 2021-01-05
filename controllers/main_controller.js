@@ -52,10 +52,7 @@ const isAuthenticated = (req, res, next) => {
 today = () => {
     let date = new Date()
     return date.toLocaleString('en-US', { timeZone: 'America/New_York' })
-
 }
-
-time = () => {}
 
 //COMMENTS  
 router.get("/logs/:id", isAuthenticated, (req, res) => {
