@@ -54,6 +54,8 @@ today = () => {
     return date.toLocaleString('en-US', { timeZone: 'America/New_York' })
 }
 
+time = () => {};
+
 //COMMENTS  
 router.get("/logs/:id", isAuthenticated, (req, res) => {
     Paws.findById(req.params.id, (err, found) => {
