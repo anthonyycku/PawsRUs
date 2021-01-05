@@ -170,7 +170,11 @@ router.post('/new', parser.single("image"), (req, res) => {
     let result = req.body;
 
     result.favoritedBy = [];
-
+    result.logs = Array(1).fill({
+        username: "system",
+        date: today(),
+        log: "Great add! Start commenting by clicking on the blue icon!"
+    })
     if (!req.file) {
         result.image = "/images/sample/na.jpeg";
     } else {
@@ -198,7 +202,6 @@ router.post('/new', parser.single("image"), (req, res) => {
                 justCreated = true;
                 count += 1;
                 let lastPage = Math.ceil(count / 8);
-                console.log(Math.ceil(count / 8))
                 res.redirect('/main/' + lastPage);
             })
         } else {
