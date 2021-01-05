@@ -27,25 +27,35 @@ const isAuthenticated = (req, res, next) => {
 //             ROUTES           //
 //////////////////////////////////
 //Todays date
+// today = () => {
+//     let today = new Date();
+//     today.toString();
+//     let y = today.getFullYear();
+//     let m = today.getMonth() + 1;
+//     let d = today.getDate();
+//     return `${m}/${d}/${y}`
+// }
+
+// time = () => {
+//     let date = new Date();
+//     date.toString();
+//     let hours = date.getHours();
+//     let minutes = date.getMinutes();
+//     let ampm = hours >= 12 ? 'PM' : 'AM';
+//     hours = hours % 12;
+//     hours = hours ? hours : 12;
+//     minutes = minutes < 10 ? '0' + minutes : minutes;
+//     let strTime = hours + ':' + minutes + ampm;
+//     return strTime;
+// }
+
 today = () => {
-    let today = new Date();
-    let y = today.getFullYear();
-    let m = today.getMonth() + 1;
-    let d = today.getDate();
-    return `${m}/${d}/${y}`
+    let date = new Date()
+    return date.toLocaleString('en-US', { timeZone: 'America/New_York' })
+
 }
 
-time = () => {
-    let date = new Date();
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
-    let ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12;
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    let strTime = hours + ':' + minutes + ampm;
-    return strTime;
-}
+time = () => {}
 
 //COMMENTS  
 router.get("/logs/:id", isAuthenticated, (req, res) => {
