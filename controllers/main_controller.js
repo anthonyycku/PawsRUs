@@ -35,6 +35,18 @@ today = () => {
     return `${m}/${d}/${y}`
 }
 
+time = () => {
+    let date = new Date();
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    let strTime = hours + ':' + minutes + ampm;
+    return strTime;
+}
+
 //COMMENTS  
 router.get("/logs/:id", isAuthenticated, (req, res) => {
     Paws.findById(req.params.id, (err, found) => {
@@ -47,6 +59,7 @@ router.get("/logs/:id", isAuthenticated, (req, res) => {
     })
 })
 
+//delete comment
 router.put("/logs/:id", isAuthenticated, (req, res) => {
     Paws.findById(req.params.id, (err, found) => {
         let currentID = req.body.logID
@@ -59,10 +72,12 @@ router.put("/logs/:id", isAuthenticated, (req, res) => {
     }, 150)
 })
 
-router.post("/logs/:id", (req, res) => {
+//post comment
+router.post("/logs/:id", isAuthenticated, (req, res) => {
     Paws.findById(req.params.id, (err, found) => {
         req.body.username = req.session.currentUser.username;
         req.body.date = today();
+        req.body.time = time();
         found.logs.push(req.body);
         found.save();
         setTimeout(() => {
@@ -264,8 +279,8 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithDogs: false,
                 description: "Great doggo from downtown",
                 favoritedBy: [],
-                logs: [{ username: "system", log: "Handsome looking manbun", date: today() },
-                    { username: "test123", date: today(), log: "He's too big, got any smaller versions of these?" }
+                logs: [{ username: "system", log: "Handsome looking manbun", date: today(), time: time() },
+                    { username: "test123", date: today(), log: "He's too big, got any smaller versions of these?", time: time() }
                 ]
             }, {
                 name: "Big daddy",
@@ -277,7 +292,7 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithDogs: true,
                 description: "Most handsome dog in chinatown",
                 favoritedBy: [],
-                logs: [{ username: "system", log: "Very white and furry and cute", date: today() }]
+                logs: [{ username: "system", log: "Very white and furry and cute", date: today(), time: time() }]
             }, {
                 name: "Polo",
                 age: "10yr",
@@ -288,7 +303,7 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithDogs: false,
                 description: "Absolutely hates kids",
                 favoritedBy: [],
-                logs: [{ username: "system", log: "WHy are his eyes so bulgy", date: today() }]
+                logs: [{ username: "system", log: "WHy are his eyes so bulgy", date: today(), time: time() }]
             }, {
                 name: "Not Polo",
                 age: "10yr",
@@ -299,7 +314,7 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithDogs: false,
                 description: "Is he disguised?",
                 favoritedBy: [],
-                logs: [{ username: "system", log: "THAT IS DEFINITELY NOT POLO", date: today() }]
+                logs: [{ username: "system", log: "THAT IS DEFINITELY NOT POLO", date: today(), time: time() }]
             }, {
                 name: "Froggo",
                 age: "Who cares?",
@@ -310,7 +325,7 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithDogs: true,
                 description: "Don't know if this guy is a frog or a cow",
                 favoritedBy: [],
-                logs: [{ username: "admin", log: "Is this thing real?", date: today() }]
+                logs: [{ username: "admin", log: "Is this thing real?", date: today(), time: time() }]
             }, {
                 name: "Slim Jim",
                 age: "13yr",
@@ -321,7 +336,7 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithDogs: false,
                 description: "His tongue can whip you senseless",
                 favoritedBy: [],
-                logs: [{ username: "system", log: "I'm a robot and I'd be surprised if you clicked on this one", date: today() }]
+                logs: [{ username: "system", log: "I'm a robot and I'd be surprised if you clicked on this one", date: today(), time: time() }]
             }, {
                 name: "Tubs",
                 age: "3yr",
@@ -332,7 +347,7 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithDogs: false,
                 description: "Sleeps all day and will eat your foot",
                 favoritedBy: [],
-                logs: [{ username: "system", log: "He looks kinda pudgey", date: today() }]
+                logs: [{ username: "system", log: "He looks kinda pudgey", date: today(), time: time() }]
             }, {
                 name: "Nemo",
                 age: "4yr 1mo",
@@ -343,7 +358,7 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithDogs: false,
                 description: "This is a cat, not a dog!",
                 favoritedBy: [],
-                logs: [{ username: "admin", log: "This is a fake dog", date: today() }]
+                logs: [{ username: "admin", log: "This is a fake dog", date: today(), time: time() }]
             }, {
                 name: "Meeeeeeep",
                 age: "6mo",
@@ -354,7 +369,7 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithDogs: false,
                 description: "This guy stretches.",
                 favoritedBy: [],
-                logs: [{ username: "admin", log: "Vaccinated for rabies", date: today() }]
+                logs: [{ username: "admin", log: "Vaccinated for rabies", date: today(), time: time() }]
             }, {
                 name: "Puppers",
                 age: "2mo",
@@ -365,7 +380,7 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithDogs: false,
                 description: "Cutest little puppers that's not a frog",
                 favoritedBy: [],
-                logs: [{ username: "admin", log: "Vaccinated for rabies", date: today() }]
+                logs: [{ username: "admin", log: "Vaccinated for rabies", date: today(), time: time() }]
             }, ], (error, data) => {
 
             })

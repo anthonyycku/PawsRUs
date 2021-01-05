@@ -13,7 +13,7 @@ const petSchema = new mongoose.Schema({
     goodWithDogs: Boolean,
     goodWithCats: Boolean,
     favoritedBy: [String],
-    logs: [{ username: String, date: String, log: String }]
+    logs: [{ username: String, date: String, time: String, log: String }]
 })
 
 const Pet = mongoose.model('pawsrus', petSchema)
