@@ -196,7 +196,9 @@ router.post('/new', parser.single("image"), (req, res) => {
         if (count < maxProfiles) {
             Paws.create(req.body, (error, createdPet) => {
                 justCreated = true;
+                count += 1;
                 let lastPage = Math.ceil(count / 8);
+                console.log(Math.ceil(count / 8))
                 res.redirect('/main/' + lastPage);
             })
         } else {
