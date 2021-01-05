@@ -26,6 +26,50 @@ const isAuthenticated = (req, res, next) => {
 //////////////////////////////////
 //             ROUTES           //
 //////////////////////////////////
+//Todays date
+today = () => {
+    let today = new Date();
+    let y = today.getFullYear();
+    let m = today.getMonth() + 1;
+    let d = today.getDate();
+    return `${m}/${d}/${y}`
+}
+
+//COMMENTS  
+router.get("/logs/:id", isAuthenticated, (req, res) => {
+    Paws.findById(req.params.id, (err, found) => {
+        res.render("main/logs.ejs", {
+            currentUser: req.session.currentUser,
+            pet: found,
+            petLog: found.logs,
+            latestPage: latestPage
+        })
+    })
+})
+
+router.put("/logs/:id", isAuthenticated, (req, res) => {
+    Paws.findById(req.params.id, (err, found) => {
+        let currentID = req.body.logID
+        console.log(currentID);
+        found.logs = found.logs.filter(log => log.id !== currentID);
+        found.save();
+    })
+    setTimeout(() => {
+        res.redirect("/main/logs/" + req.params.id)
+    }, 150)
+})
+
+router.post("/logs/:id", (req, res) => {
+    Paws.findById(req.params.id, (err, found) => {
+        req.body.username = req.session.currentUser.username;
+        req.body.date = today();
+        found.logs.push(req.body);
+        found.save();
+        setTimeout(() => {
+            res.redirect("/main/logs/" + req.params.id);
+        }, 100)
+    })
+})
 
 //FAVORITES
 
@@ -198,7 +242,8 @@ router.get('/show/:id', (req, res) => {
         res.render('main/show.ejs', {
             pet: foundPet,
             currentUser: req.session.currentUser,
-            latestPage: latestPage
+            latestPage: latestPage,
+            comments: foundPet.logs.length
         })
     })
 })
@@ -218,7 +263,10 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithKids: true,
                 goodWithDogs: false,
                 description: "Great doggo from downtown",
-                favoritedBy: []
+                favoritedBy: [],
+                logs: [{ username: "system", log: "Handsome looking manbun", date: today() },
+                    { username: "test123", date: today(), log: "He's too big, got any smaller versions of these?" }
+                ]
             }, {
                 name: "Big daddy",
                 age: "1yr 5mo",
@@ -228,7 +276,8 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithKids: true,
                 goodWithDogs: true,
                 description: "Most handsome dog in chinatown",
-                favoritedBy: []
+                favoritedBy: [],
+                logs: [{ username: "system", log: "Very white and furry and cute", date: today() }]
             }, {
                 name: "Polo",
                 age: "10yr",
@@ -238,7 +287,8 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithKids: false,
                 goodWithDogs: false,
                 description: "Absolutely hates kids",
-                favoritedBy: []
+                favoritedBy: [],
+                logs: [{ username: "system", log: "WHy are his eyes so bulgy", date: today() }]
             }, {
                 name: "Not Polo",
                 age: "10yr",
@@ -248,7 +298,8 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithKids: false,
                 goodWithDogs: false,
                 description: "Is he disguised?",
-                favoritedBy: []
+                favoritedBy: [],
+                logs: [{ username: "system", log: "THAT IS DEFINITELY NOT POLO", date: today() }]
             }, {
                 name: "Froggo",
                 age: "Who cares?",
@@ -258,7 +309,8 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithKids: true,
                 goodWithDogs: true,
                 description: "Don't know if this guy is a frog or a cow",
-                favoritedBy: []
+                favoritedBy: [],
+                logs: [{ username: "admin", log: "Is this thing real?", date: today() }]
             }, {
                 name: "Slim Jim",
                 age: "13yr",
@@ -268,7 +320,8 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithKids: false,
                 goodWithDogs: false,
                 description: "His tongue can whip you senseless",
-                favoritedBy: []
+                favoritedBy: [],
+                logs: [{ username: "system", log: "I'm a robot and I'd be surprised if you clicked on this one", date: today() }]
             }, {
                 name: "Tubs",
                 age: "3yr",
@@ -278,7 +331,8 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithKids: true,
                 goodWithDogs: false,
                 description: "Sleeps all day and will eat your foot",
-                favoritedBy: []
+                favoritedBy: [],
+                logs: [{ username: "system", log: "He looks kinda pudgey", date: today() }]
             }, {
                 name: "Nemo",
                 age: "4yr 1mo",
@@ -288,7 +342,8 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithKids: true,
                 goodWithDogs: false,
                 description: "This is a cat, not a dog!",
-                favoritedBy: []
+                favoritedBy: [],
+                logs: [{ username: "admin", log: "This is a fake dog", date: today() }]
             }, {
                 name: "Meeeeeeep",
                 age: "6mo",
@@ -298,7 +353,8 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithKids: true,
                 goodWithDogs: false,
                 description: "This guy stretches.",
-                favoritedBy: []
+                favoritedBy: [],
+                logs: [{ username: "admin", log: "Vaccinated for rabies", date: today() }]
             }, {
                 name: "Puppers",
                 age: "2mo",
@@ -308,7 +364,8 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithKids: true,
                 goodWithDogs: false,
                 description: "Cutest little puppers that's not a frog",
-                favoritedBy: []
+                favoritedBy: [],
+                logs: [{ username: "admin", log: "Vaccinated for rabies", date: today() }]
             }, ], (error, data) => {
 
             })

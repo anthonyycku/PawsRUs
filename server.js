@@ -68,7 +68,7 @@ global.maxProfiles = 40;
 global.toggleAccordion = false;
 global.userPage;
 global.defaultImage;
-global.latestPage;
+global.latestPage = "/main/1";
 
 
 // Routes
