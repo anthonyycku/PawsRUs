@@ -51,7 +51,8 @@ const isAuthenticated = (req, res, next) => {
 
 today = () => {
     let date = new Date()
-    return date.toLocaleString('en-US', { timeZone: 'America/New_York' })
+    //return date.toLocaleString('en-US', { timeZone: 'America/New_York' })
+    return date.toLocaleString()
 }
 
 time = () => {};
