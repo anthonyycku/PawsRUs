@@ -440,6 +440,7 @@ router.get('/:page', (req, res) => {
             userPage = page;
             latestPage = "/main/" + page;
             setTimeout(function() {
+                justCreated = false;
                 justDeleted = false;
             }, 500);
             setTimeout((function() {
