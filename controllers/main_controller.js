@@ -26,28 +26,7 @@ const isAuthenticated = (req, res, next) => {
 //////////////////////////////////
 //             ROUTES           //
 //////////////////////////////////
-//Todays date
-// today = () => {
-//     let today = new Date();
-//     today.toString();
-//     let y = today.getFullYear();
-//     let m = today.getMonth() + 1;
-//     let d = today.getDate();
-//     return `${m}/${d}/${y}`
-// }
 
-// time = () => {
-//     let date = new Date();
-//     date.toString();
-//     let hours = date.getHours();
-//     let minutes = date.getMinutes();
-//     let ampm = hours >= 12 ? 'PM' : 'AM';
-//     hours = hours % 12;
-//     hours = hours ? hours : 12;
-//     minutes = minutes < 10 ? '0' + minutes : minutes;
-//     let strTime = hours + ':' + minutes + ampm;
-//     return strTime;
-// }
 
 today = () => {
     let date = new Date()
@@ -169,33 +148,17 @@ router.get('/new', isAuthenticated, (req, res) => {
 router.post('/new', parser.single("image"), (req, res) => {
     let result = req.body;
 
+    result.image = req.file ? req.file.path : "/images/sample/na.jpeg";
     result.favoritedBy = [];
     result.logs = Array(1).fill({
         username: req.session.currentUser.username,
         date: today(),
         log: "Please help this cutey find a good home! Contact me at xxx-xxx-xxxx!"
     })
-    if (!req.file) {
-        result.image = "/images/sample/na.jpeg";
-    } else {
-        result.image = req.file.path;
-    }
+    result.goodWithKids = result.goodWithKids === "on" ? "true" : "false";
+    result.goodWithDogs = result.goodWithDogs === "on" ? "true" : "false";
+    result.goodWithCats = result.goodWithCats === "on" ? "true" : "false";
 
-    if (result.goodWithKids === "on") {
-        result.goodWithKids = true;
-    } else {
-        result.goodWithKids = false;
-    }
-    if (result.goodWithDogs === "on") {
-        result.goodWithDogs = true;
-    } else {
-        result.goodWithDogs = false;
-    }
-    if (result.goodWithCats === "on") {
-        result.goodWithCats = true;
-    } else {
-        result.goodWithCats = false;
-    }
     Paws.countDocuments({}, (err, count) => {
         if (count < maxProfiles) {
             Paws.create(req.body, (error, createdPet) => {
@@ -208,7 +171,6 @@ router.post('/new', parser.single("image"), (req, res) => {
             res.redirect("/");
         }
     })
-
 })
 
 // EDIT
@@ -256,10 +218,20 @@ router.put('/edit/:id', parser.single("image"), isAuthenticated, (req, res) => {
 
 // DELETE
 router.delete('/show/:id', (req, res) => {
-    Paws.findByIdAndRemove(req.params.id, (err, deletedPet) => {
-        justDeleted = true;
-        res.redirect('/main/' + userPage)
+    Paws.find({}, (err, foundPet) => {
+        if (foundPet.length !== 1) {
+            Paws.find({}, (err, found) => {
+                userPage = found.length === 1 ? userPage - 1 : userPage;
+            }).skip((userPage * 8) - 8).limit(8);
+        }
     })
+
+    setTimeout(() => {
+        Paws.findByIdAndRemove(req.params.id, (err, deletedPet) => {
+            justDeleted = true;
+            res.redirect('/main/' + userPage)
+        })
+    }, 100)
 })
 
 // SHOW

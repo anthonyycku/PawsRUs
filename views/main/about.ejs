@@ -32,9 +32,41 @@
                         <p>Hi there! Welcome to my project, Paws R Us. This project aims to simulate an animal
                             shelter
                             adoption website with features you might see on a real website including
-                            account/username/password validation, favoriting specific profiles, image uploading. Built
+                            account/username/password validation, favoriting, commenting, and image uploading. Built
                             with full CRUD operations and REST API.</p>
 
+                        <hr>
+                        <h3 class="alert-heading">Creator's story</h3>
+                        <p>My approach to this project was to focus on implementing features that varied in code design,
+                            from signup validation to pageination to commenting.
+                        </p>
+                        <p>
+                            I decided on a minimalistic front-end design as I prefer working on code that handles
+                            server-side operations rather than making my site look nice, yet
+                            I found myself spending a lot of time on design as well to ensure consistency.
+                        </p>
+                        <p>
+                            Creating the pagination definitely took the most amount of brain power to create from
+                            scratch. I realized after
+                            making the pagination that it came with a few unforeseen issues like having to keep track of
+                            the users current page to ensure the user is redirected back to the same page after
+                            completing an operation. A bulk of my time was dedicated to maintaining consistency of page
+                            redirections.
+                            For
+                            example, when deleting the last profile on a page, the code will redirect you to the
+                            previous
+                            page (unless you're already on the first page), taking the user back to their last
+                            visited page when they click the back button on a profile, creating a new document takes the
+                            user
+                            to the page where the document was made, etc. I could just as easily have let the operations
+                            always redirect the user to page 1, but where's the fun in that?
+
+                        </p>
+                        <p>
+                            My hope is that this site can show off some back-end features as the front-end is quite
+                            uninteresting except for the sign-up reactive validation. When I made this project, I had
+                            not yet learned React JS and I hope to make a much cooler app in the future with new tools.
+                        </p>
                         <hr>
                         <h4 class="alert-heading">Project Stack</h4>
                         <strong>Back-end</strong>
@@ -66,6 +98,7 @@
                         <h4>Documentation, features, and technologies</h4>
                         <h5><strong>- Overview</strong></h5>
                         <ul>
+                            <li>Pagination displaying up to 8 documents on each page</li>
                             <li>User must sign up for a new account and sign in to access certain features</li>
                             <li>Registration page has client-side responsive validation</li>
                             <li>Signed in users can create new data, seed sample data, edit, and delete any and all
