@@ -442,6 +442,7 @@ router.get('/:page', (req, res) => {
             setTimeout(function() {
                 userCreated = false;
                 justDeleted = false;
+                justCreated = false;
             }, 500);
             setTimeout((function() {
                 res.render('main/index.ejs', {
