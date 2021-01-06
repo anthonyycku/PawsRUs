@@ -171,9 +171,9 @@ router.post('/new', parser.single("image"), (req, res) => {
 
     result.favoritedBy = [];
     result.logs = Array(1).fill({
-        username: "system",
+        username: req.session.currentUser.username,
         date: today(),
-        log: "Great add! Start commenting by clicking on the blue icon!"
+        log: "Please help this cutey find a good home! Contact me at xxx-xxx-xxxx!"
     })
     if (!req.file) {
         result.image = "/images/sample/na.jpeg";
