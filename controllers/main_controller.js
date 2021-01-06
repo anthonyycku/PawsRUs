@@ -147,7 +147,6 @@ router.get('/new', isAuthenticated, (req, res) => {
 
 router.post('/new', parser.single("image"), (req, res) => {
     let result = req.body;
-
     result.image = req.file ? req.file.path : "/images/sample/na.jpeg";
     result.favoritedBy = [];
     result.logs = Array(1).fill({
