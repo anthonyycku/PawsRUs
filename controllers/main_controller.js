@@ -148,6 +148,7 @@ router.get('/new', isAuthenticated, (req, res) => {
 router.post('/new', parser.single("image"), (req, res) => {
     let result = req.body;
     result.image = req.file ? req.file.path : "/images/sample/na.jpeg";
+    result.createdBy = req.session.currentUser.username;
     result.favoritedBy = [];
     result.logs = Array(1).fill({
         username: req.session.currentUser.username,
@@ -268,7 +269,8 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 favoritedBy: [],
                 logs: [{ username: "system", log: "Handsome looking manbun", date: today(), time: time() },
                     { username: "test123", date: today(), log: "He's too big, got any smaller versions of these?", time: time() }
-                ]
+                ],
+                createdBy: req.session.currentUser.username
             }, {
                 name: "Big daddy",
                 age: "1yr 5mo",
@@ -279,7 +281,8 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithDogs: true,
                 description: "Most handsome dog in chinatown",
                 favoritedBy: [],
-                logs: [{ username: "system", log: "Very white and furry and cute", date: today(), time: time() }]
+                logs: [{ username: "system", log: "Very white and furry and cute", date: today(), time: time() }],
+                createdBy: req.session.currentUser.username
             }, {
                 name: "Polo",
                 age: "10yr",
@@ -290,7 +293,8 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithDogs: false,
                 description: "Absolutely hates kids",
                 favoritedBy: [],
-                logs: [{ username: "system", log: "WHy are his eyes so bulgy", date: today(), time: time() }]
+                logs: [{ username: "system", log: "WHy are his eyes so bulgy", date: today(), time: time() }],
+                createdBy: req.session.currentUser.username
             }, {
                 name: "Not Polo",
                 age: "10yr",
@@ -301,7 +305,8 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithDogs: false,
                 description: "Is he disguised?",
                 favoritedBy: [],
-                logs: [{ username: "system", log: "THAT IS DEFINITELY NOT POLO", date: today(), time: time() }]
+                logs: [{ username: "system", log: "THAT IS DEFINITELY NOT POLO", date: today(), time: time() }],
+                createdBy: req.session.currentUser.username
             }, {
                 name: "Froggo",
                 age: "Who cares?",
@@ -312,7 +317,8 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithDogs: true,
                 description: "Don't know if this guy is a frog or a cow",
                 favoritedBy: [],
-                logs: [{ username: "admin", log: "Is this thing real?", date: today(), time: time() }]
+                logs: [{ username: "admin", log: "Is this thing real?", date: today(), time: time() }],
+                createdBy: req.session.currentUser.username
             }, {
                 name: "Slim Jim",
                 age: "13yr",
@@ -323,7 +329,8 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithDogs: false,
                 description: "His tongue can whip you senseless",
                 favoritedBy: [],
-                logs: [{ username: "system", log: "I'm a robot and I'd be surprised if you clicked on this one", date: today(), time: time() }]
+                logs: [{ username: "system", log: "I'm a robot and I'd be surprised if you clicked on this one", date: today(), time: time() }],
+                createdBy: req.session.currentUser.username
             }, {
                 name: "Tubs",
                 age: "3yr",
@@ -334,7 +341,8 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithDogs: false,
                 description: "Sleeps all day and will eat your foot",
                 favoritedBy: [],
-                logs: [{ username: "system", log: "He looks kinda pudgey", date: today(), time: time() }]
+                logs: [{ username: "system", log: "He looks kinda pudgey", date: today(), time: time() }],
+                createdBy: req.session.currentUser.username
             }, {
                 name: "Nemo",
                 age: "4yr 1mo",
@@ -345,7 +353,8 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithDogs: false,
                 description: "This is a cat, not a dog!",
                 favoritedBy: [],
-                logs: [{ username: "admin", log: "This is a fake dog", date: today(), time: time() }]
+                logs: [{ username: "admin", log: "This is a fake dog", date: today(), time: time() }],
+                createdBy: req.session.currentUser.username
             }, {
                 name: "Meeeeeeep",
                 age: "6mo",
@@ -356,7 +365,8 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithDogs: false,
                 description: "This guy stretches.",
                 favoritedBy: [],
-                logs: [{ username: "admin", log: "Vaccinated for rabies", date: today(), time: time() }]
+                logs: [{ username: "admin", log: "Vaccinated for rabies", date: today(), time: time() }],
+                createdBy: req.session.currentUser.username
             }, {
                 name: "Puppers",
                 age: "2mo",
@@ -367,7 +377,8 @@ router.get('/setup/seed', isAuthenticated, (req, res) => {
                 goodWithDogs: false,
                 description: "Cutest little puppers that's not a frog",
                 favoritedBy: [],
-                logs: [{ username: "admin", log: "Vaccinated for rabies", date: today(), time: time() }]
+                logs: [{ username: "admin", log: "Vaccinated for rabies", date: today(), time: time() }],
+                createdBy: req.session.currentUser.username
             }, ], (error, data) => {
 
             })
