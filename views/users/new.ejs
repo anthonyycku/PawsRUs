@@ -40,13 +40,26 @@
             <!-- Username -->
             <div class="input-group flex-nowrap">
               <span class="input-group-text" id="addon-wrapping"><i class="fal fa-user"></i></span>
-              <input name="username" type="text" class="form-control" placeholder="Username" aria-label="Username"
-                aria-describedby="addon-wrapping" autocomplete="off" <%if (user) { %> value="<%=user%>" <% } %>
-                data-bs-toggle="tooltip" data-bs-placement="right" title="Usernames must be 4-12 chars long,
-                 no symbols or caps, and contain at least 1 letter">
+              <input id="usernameBox" name="username" type="text" class="form-control" placeholder="Username"
+                aria-label="Username" aria-describedby="addon-wrapping" autocomplete="off" <%if (user) { %>
+                value="<%=user%>" <% } %>>
 
             </div>
-
+            <!-- User verification -->
+            <div class="verify user1" style="color: red; display: none">
+              Username must be 4-12 characters
+            </div>
+            <div class=" verify user2" style="color: red; display: none">
+              No capitalization / symbols
+            </div>
+            <div class="verify user3" style="color: red; display: none">
+              At least 1 letter
+            </div>
+            <div style="margin-top: 5px;">
+              <i style="display: none; color: red" class="fas fa-times-octagon invalidUser"> Invalid username</i>
+              <i style="display: none; color: green" class="fas fa-check-circle validUser"> Valid username</i>
+            </div>
+            <!--  -->
             </br>
             <!-- Password -->
             <div class="input-group flex-nowrap">
@@ -74,8 +87,8 @@
             <p style="color: crimson">Invalid username.</p>
             <% } %>
             <!-- SUBMIT -->
-            <input type="submit" class="btn btn-success" value="Sign Up" style="margin-bottom: 20px; margin-top: 10px;">
-            <p>Already have an account? <a href="/sessions/new">Sign in.</a></p>
+            <input type="submit" class="btn btn-success" value="Sign Up" style="margin-top: 10px;">
+            <p style="margin: 0;">Already have an account? <a href="/sessions/new">Sign in.</a></p>
           </form>
         </div>
       </div>
@@ -85,9 +98,67 @@
   <!-- Container end -->
 
   <!-- Scripts -->
+  <script>
+    let valid;
 
+    $("#usernameBox").on("keyup", () => {
+      let usernameLength = $("#usernameBox").val().length;
+      let validTest1 = !(usernameLength >= 4 && usernameLength <= 12) ? "red" : "green";
+      $(".user1").css("color", validTest1);
+      let str = $("#usernameBox").val();
+      let validTest2 = (/^[a-z0-9]+$/.test(str));
+      let validTest3 = (/^(?=.*[a-z])/.test(str));
+      $(".user2").css("color", (!validTest2 ? "red" : "green"));
+      $(".user3").css("color", (!validTest3 ? "red" : "green"));
+      if ((usernameLength >= 4 && usernameLength <= 12) && validTest2 && validTest3) {
+        valid = true;
+      } else {
+        valid = false;
+      }
+    });
 
+    $("#usernameBox").ready(() => {
+      let usernameLength = $("#usernameBox").val().length;
+      if (usernameLength > 0) {
+        let validTest1 = !(usernameLength >= 4 && usernameLength <= 12) ? "red" : "green";
+        $(".user1").css("color", validTest1);
+        let str = $("#usernameBox").val();
+        let validTest2 = (/^[a-z0-9]+$/.test(str));
+        let validTest3 = (/^(?=.*[a-z])/.test(str));
+        $(".user2").css("color", (!validTest2 ? "red" : "green"));
+        $(".user3").css("color", (!validTest3 ? "red" : "green"));
+        if ((usernameLength >= 4 && usernameLength <= 12) && validTest2 && validTest3) {
+          valid = true;
+          $(".validUser").css("display", "flex");
+          $(".invalidUser").css("display", "none");
+        } else {
+          valid = false;
+          $(".validUser").css("display", "none");
+          $(".invalidUser").css("display", "flex");
+        }
+      }
+    })
 
+    let makeDisplay = () => {
+      $(".verify").css("display", "flex");
+      $(".validUser").css("display", "none");
+      $(".invalidUser").css("display", "none");
+    }
+
+    let makeInvis = () => {
+      $(".verify").css("display", "none");
+      if (valid) {
+        $(".validUser").css("display", "flex");
+        $(".invalidUser").css("display", "none");
+      } else {
+        $(".validUser").css("display", "none");
+        $(".invalidUser").css("display", "flex");
+      }
+    }
+
+    $("#usernameBox").focus(makeDisplay);
+    $("#usernameBox").blur(makeInvis);
+  </script>
 
 </body>
 

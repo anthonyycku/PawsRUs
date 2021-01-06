@@ -27,7 +27,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(session({
     secret: process.env.SECRET,
     resave: false,
-    saveUnitialized: false
+    saveUnitialized: false,
+    cookie: {
+        path: '/',
+        httpOnly: true,
+        maxAge: 3600000
+    }
 }));
 
 
@@ -58,6 +63,7 @@ const sessionsController = require("./controllers/sessions_controller.js");
 app.use('/main', mainController);
 app.use("/users", userController);
 app.use("/sessions", sessionsController);
+
 
 // Globals
 global.userCreated = false;
