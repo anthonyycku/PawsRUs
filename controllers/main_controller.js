@@ -153,7 +153,7 @@ router.post('/new', parser.single("image"), (req, res) => {
     result.logs = Array(1).fill({
         username: req.session.currentUser.username,
         date: today(),
-        log: "Please help" + req.body.name + "find a good home! Contact me at xxx-xxx-xxxx!"
+        log: "Please help " + req.body.name + " find a good home! Contact me at xxx-xxx-xxxx!"
     })
     result.goodWithKids = result.goodWithKids === "on" ? "true" : "false";
     result.goodWithDogs = result.goodWithDogs === "on" ? "true" : "false";
